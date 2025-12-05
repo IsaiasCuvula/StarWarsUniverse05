@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class StarWarsUniverse {
 
-    private ArrayList<Planet> planets = new ArrayList<>();
+    private final ArrayList<Planet> planets = new ArrayList<>();
 
     public  void printMenu() {
         System.out.println("**************************************");
@@ -25,7 +26,35 @@ public class StarWarsUniverse {
     }
 
 
-    public void createJedi(String planetName, String jediName){
+    public void createJedi(String planetName, String jediName,
+    String jediRank, int jediAge, String saberColor,
+            int jediStrength){
+
+        Planet savedPlanet = getPlanetByName(planetName);
+
+        if(savedPlanet == null){
+            System.out.printf("Planet %s does not exist %n", planetName);
+            return;
+        }else{
+            Jedi savedJedi = getJediByName(jediName);
+            if(savedJedi != null){
+                System.out.printf("Jedi %s already exist %n", jediName);
+            }else{
+                Rank rank = Rank.fromString(jediRank);
+
+                if(rank == null){
+                    System.out.println("Enter a valid Jedi Rank");
+                    return;
+                }else{
+                    Jedi newJedi = new Jedi(
+                            jediName, rank, jediAge, saberColor, jediStrength
+                    );
+                    savedPlanet.addJedi(newJedi);
+                }
+
+            }
+        }
+
         System.out.println("Jedi Added Successfully...");
     }
 
@@ -37,14 +66,7 @@ public class StarWarsUniverse {
             return;
         }
 
-        boolean alreadyExist = false;
-
-        for (Planet planet: planets){
-            if (planet.getName().equalsIgnoreCase(name)) {
-                alreadyExist = true;
-                break;
-            }
-        }
+        boolean alreadyExist = getPlanetByName(name) != null;
 
         if(alreadyExist){
             System.out.printf("Planet %s already exist %n", name);
@@ -53,5 +75,41 @@ public class StarWarsUniverse {
             planets.add(planet);
             System.out.printf("Planet %s added successfully...%n", planet.getName());
         }
+    }
+
+    public Jedi getJediByName(String name){
+        Jedi savedJedi = null;
+
+        if(name.trim().isEmpty()){
+            throw new IllegalArgumentException("Jedi name cannot be empty");
+        }
+        for (Planet planet: planets){
+            List<Jedi> jedis = planet.getJediList();
+            for (Jedi jedi: jedis){
+                if (jedi.getName().equalsIgnoreCase(name)) {
+                    savedJedi = jedi;
+                    break;
+                }
+            }
+            if(savedJedi != null){
+                break;
+            }
+        }
+        return savedJedi;
+    }
+
+    public Planet getPlanetByName(String name){
+        Planet savedPlanet = null;
+
+        if(name.trim().isEmpty()){
+            throw new IllegalArgumentException("Planet name cannot be empty");
+        }
+        for (Planet planet: planets){
+            if (planet.getName().equalsIgnoreCase(name)) {
+                savedPlanet = planet;
+                break;
+            }
+        }
+        return savedPlanet;
     }
 }
