@@ -7,24 +7,22 @@ public class Jedi {
     private Rank rank;
     private int age;
     private String lightsaberColor;
-    private int force;
+    private int strength;
 
-    public Jedi(String name, String rank, int age, String lightsaberColor, int force)  throws JediException{
+    public Jedi(String name, String rank, int age, String lightsaberColor, int strength)  throws JediException{
         setName(name);
         setRank(rank);
         setAge(age);
         setLightsaberColor(lightsaberColor);
-        setForce(force);
+        setStrength(strength);
     }
-
-
 
     public void setName(String name) throws JediException {
         if(name == null){
-            throw new JediException("Invalid models.Jedi name");
+            throw new JediException("Invalid Jedi name");
         }
         if(name.trim().isEmpty()){
-            throw new JediException("Invalid models.Jedi name");
+            throw new JediException("Invalid Jedi name");
         }
         this.name = name;
     }
@@ -32,15 +30,15 @@ public class Jedi {
 
     public void setRank(String rankString) throws  JediException{
         if(rankString == null){
-            throw new JediException("Invalid models.Jedi models.Rank");
+            throw new JediException("Invalid Jedi models.Rank");
         }
         if(rankString.trim().isEmpty()){
-            throw new JediException("Invalid models.Jedi models.Rank");
+            throw new JediException("Invalid Jedi models.Rank");
         }
         Rank rank = Rank.fromString(rankString);
 
         if(rank == null){
-            throw new JediException("Invalid models.Jedi models.Rank (YOUNGLING, INITIATE," +
+            throw new JediException("Invalid Jedi Rank (YOUNGLING, INITIATE," +
                     "PADAWAN, KNIGHT-ASPIRANT, KNIGHT, MASTER, BATTLE_MASTER and" +
                     "GRAND_MASTER)");
         }
@@ -50,16 +48,16 @@ public class Jedi {
 
     public void setAge(int age) throws JediException {
         if(age < 0){
-            throw new JediException("Invalid models.Jedi age");
+            throw new JediException("Invalid Jedi age");
         }
         this.age = age;
     }
 
-    public void setForce(int force) throws JediException {
-        if(force != 1 && force != 2){
-            throw new JediException("Enter a valid models.Jedi Strength (1 to 2)");
+    public void setStrength(int strength) throws JediException {
+        if(strength != 1 && strength != 2){
+            throw new JediException("Enter a valid Jedi Strength (1 to 2)");
         }
-        this.force = force;
+        this.strength = strength;
     }
 
     public void setLightsaberColor(String lightsaberColor)  throws JediException {
@@ -72,8 +70,8 @@ public class Jedi {
         this.lightsaberColor = lightsaberColor;
     }
 
-    public int getForce() {
-        return force;
+    public int getStrength() {
+        return strength;
     }
     public int getAge() {
         return age;
@@ -91,12 +89,12 @@ public class Jedi {
 
     @Override
     public String toString() {
-        return "models.Jedi {\n" +
+        return "Jedi {\n" +
                 "  name='" + name + "',\n" +
                 "  rank=" + rank + ",\n" +
                 "  age=" + age + ",\n" +
                 "  lightsaberColor='" + lightsaberColor + "',\n" +
-                "  force=" + force + "\n" +
+                "  force=" + strength + "\n" +
                 "}";
     }
 }
