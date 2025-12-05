@@ -7,9 +7,9 @@ public class Jedi {
     private Rank rank;
     private int age;
     private String lightsaberColor;
-    private int strength;
+    private double strength;
 
-    public Jedi(String name, String rank, int age, String lightsaberColor, int strength)  throws JediException{
+    public Jedi(String name, String rank, int age, String lightsaberColor, double strength)  throws JediException{
         setName(name);
         setRank(rank);
         setAge(age);
@@ -53,7 +53,7 @@ public class Jedi {
         this.age = age;
     }
 
-    public void setStrength(int strength) throws JediException {
+    public void setStrength(double strength) throws JediException {
         if(strength != 1 && strength != 2){
             throw new JediException("Enter a valid Jedi Strength (1 to 2)");
         }
@@ -70,7 +70,7 @@ public class Jedi {
         this.lightsaberColor = lightsaberColor;
     }
 
-    public int getStrength() {
+    public double getStrength() {
         return strength;
     }
     public int getAge() {
