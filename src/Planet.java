@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Planet {
     private String name;
-    private Jedi jedi;
-    public Planet(String name, Jedi jedi) {
+    private final List<Jedi> inhabitants = new ArrayList<>();
+
+    public Planet(String name) {
         this.name = name;
-        this.jedi = jedi;
     }
 
     public String getName() {
@@ -14,19 +17,9 @@ public class Planet {
         this.name = name;
     }
 
-    public Jedi getJedi() {
-        return jedi;
-    }
-
-    public void setJedi(Jedi jedi) {
-        this.jedi = jedi;
-    }
 
     @Override
     public String toString() {
-        return "Planet{" +
-                "name='" + name + '\'' +
-                ", jedi=" + jedi +
-                '}';
+        return "Planet name " + name;
     }
 }

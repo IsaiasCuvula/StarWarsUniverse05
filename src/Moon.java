@@ -1,22 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Moon {
     private String name;
-    private Jedi jedi;
+    private final List<Jedi> inhabitants = new ArrayList<>();
 
-    public Moon(String name, Jedi jedi) {
+    public Moon(String name) {
         this.name = name;
-        this.jedi = jedi;
     }
 
     public String getName() {
         return name;
-    }
-    public Jedi getJedi() {
-        return jedi;
-    }
-
-    public void setJedi(Jedi jedi) {
-        this.jedi = jedi;
-
     }
 
     public void setName(String name) {
@@ -25,9 +19,6 @@ public class Moon {
 
     @Override
     public String toString() {
-        return "Moon{" +
-                "name='" + name + '\'' +
-                ", jedi=" + jedi +
-                '}';
+        return "Moon name " + name;
     }
 }
