@@ -1,3 +1,5 @@
+package models;
+
 import exceptions.PlanetException;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class Planet {
         Jedi jedi = getJediByName(name);
 
         if(!jediList.contains(jedi)){
-            throw new PlanetException("Jedi " + name + " does not exist in this planet.");
+            throw new PlanetException("models.Jedi " + name + " does not exist in this planet.");
         }
         jediList.remove(jedi);
     }
@@ -40,10 +42,10 @@ public class Planet {
 
     public void addJedi(Jedi jedi)throws PlanetException {
         if(jedi == null){
-             throw new PlanetException("Jedi cannot be null");
+             throw new PlanetException("models.Jedi cannot be null");
         }
         if(jediList.contains(jedi)){
-            throw new PlanetException("Jedi already exist");
+            throw new PlanetException("models.Jedi already exist");
         }
         jediList.add(jedi);
     }
@@ -68,6 +70,6 @@ public class Planet {
 
     @Override
     public String toString() {
-        return "Planet name " + name;
+        return "models.Planet name " + name;
     }
 }

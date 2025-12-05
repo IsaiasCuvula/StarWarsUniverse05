@@ -1,3 +1,5 @@
+package models;
+
 import exceptions.JediException;
 
 public class Jedi {
@@ -19,10 +21,10 @@ public class Jedi {
 
     public void setName(String name) throws JediException {
         if(name == null){
-            throw new JediException("Invalid Jedi name");
+            throw new JediException("Invalid models.Jedi name");
         }
         if(name.trim().isEmpty()){
-            throw new JediException("Invalid Jedi name");
+            throw new JediException("Invalid models.Jedi name");
         }
         this.name = name;
     }
@@ -30,15 +32,15 @@ public class Jedi {
 
     public void setRank(String rankString) throws  JediException{
         if(rankString == null){
-            throw new JediException("Invalid Jedi Rank");
+            throw new JediException("Invalid models.Jedi models.Rank");
         }
         if(rankString.trim().isEmpty()){
-            throw new JediException("Invalid Jedi Rank");
+            throw new JediException("Invalid models.Jedi models.Rank");
         }
         Rank rank = Rank.fromString(rankString);
 
         if(rank == null){
-            throw new JediException("Invalid Jedi Rank (YOUNGLING, INITIATE," +
+            throw new JediException("Invalid models.Jedi models.Rank (YOUNGLING, INITIATE," +
                     "PADAWAN, KNIGHT-ASPIRANT, KNIGHT, MASTER, BATTLE_MASTER and" +
                     "GRAND_MASTER)");
         }
@@ -48,14 +50,14 @@ public class Jedi {
 
     public void setAge(int age) throws JediException {
         if(age < 0){
-            throw new JediException("Invalid Jedi age");
+            throw new JediException("Invalid models.Jedi age");
         }
         this.age = age;
     }
 
     public void setForce(int force) throws JediException {
         if(force != 1 && force != 2){
-            throw new JediException("Enter a valid Jedi Strength (1 to 2)");
+            throw new JediException("Enter a valid models.Jedi Strength (1 to 2)");
         }
         this.force = force;
     }
@@ -89,7 +91,7 @@ public class Jedi {
 
     @Override
     public String toString() {
-        return "Jedi {\n" +
+        return "models.Jedi {\n" +
                 "  name='" + name + "',\n" +
                 "  rank=" + rank + ",\n" +
                 "  age=" + age + ",\n" +
