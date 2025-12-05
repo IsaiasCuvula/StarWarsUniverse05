@@ -11,6 +11,24 @@ public class Planet {
         setName(name);
     }
 
+    public Jedi getJediByName(String name) throws PlanetException{
+        Jedi savedJedi = null;
+
+        if (name == null){
+            throw new PlanetException("Name cannot be null");
+        }
+        if (name.trim().isEmpty()){
+            throw new PlanetException("Name cannot be empty");
+        }
+        for (Jedi jedi: this.getJediList()){
+            if (jedi.getName().equalsIgnoreCase(name)) {
+                savedJedi = jedi;
+                break;
+            }
+        }
+        return savedJedi;
+    }
+
     public void addJedi(Jedi jedi)throws PlanetException {
         if(jedi == null){
              throw new PlanetException("Jedi cannot be null");
