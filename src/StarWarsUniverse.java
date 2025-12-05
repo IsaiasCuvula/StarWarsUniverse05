@@ -1,3 +1,5 @@
+import exceptions.PlanetException;
+
 import java.util.ArrayList;
 
 public class StarWarsUniverse {
@@ -24,11 +26,23 @@ public class StarWarsUniverse {
         System.out.println("Command: ");
     }
 
+    public void removeJedi(String jediName, String planetName) {
+        try {
+            Planet savedPlanet = getPlanetByName(planetName);
+            if(savedPlanet == null ){
+                System.out.printf("Planet %s does not exist: ", planetName);
+                return;
+            }
+            savedPlanet.removeJedi(jediName);
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
 
     public void createJedi(String planetName, String jediName,
     String jediRank, int jediAge, String saberColor,
             int jediStrength){
-
         try{
             Planet savedPlanet = getPlanetByName(planetName);
 
@@ -45,7 +59,6 @@ public class StarWarsUniverse {
                     );
                     savedPlanet.addJedi(newJedi);
                 }
-
             }
             System.out.println("Jedi Added Successfully...");
         } catch (Exception e) {
@@ -69,33 +82,24 @@ public class StarWarsUniverse {
         }
     }
 
-    private Jedi getJediByName(String name){
-        Jedi savedJedi = null;
-
-        if(name.trim().isEmpty()){
-            throw new IllegalArgumentException("Jedi name cannot be empty");
-        }
-        for (Planet planet: planets){
-            for (Jedi jedi: planet.getJediList()){
-                if (jedi.getName().equalsIgnoreCase(name)) {
-                    savedJedi = jedi;
-                    break;
-                }
-            }
-            if(savedJedi != null){
-                break;
-            }
-        }
-        return savedJedi;
+    private Jedi getJediByName(String name) throws PlanetException {
+       Jedi savedJedi = null;
+       for (Planet planet: planets){
+           savedJedi = planet.getJediByName(name);
+           break;
+       }
+       return savedJedi;
     }
 
-    private Planet getPlanetByName(String name){
+    private Planet getPlanetByName(String name) throws PlanetException {
         Planet savedPlanet = null;
-
-        if(name.trim().isEmpty()){
-            return null;
+        if(name == null){
+            throw new PlanetException("Planet name cannot be empty");
         }
 
+        if(name.trim().isEmpty()){
+            throw new PlanetException("Planet name cannot be empty");
+        }
         for (Planet planet: planets){
             if (planet.getName().equalsIgnoreCase(name)) {
                 savedPlanet = planet;
