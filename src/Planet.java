@@ -11,6 +11,15 @@ public class Planet {
         setName(name);
     }
 
+    public void removeJedi(String name)throws PlanetException {
+        Jedi jedi = getJediByName(name);
+
+        if(!jediList.contains(jedi)){
+            throw new PlanetException("Jedi " + name + " does not exist in this planet.");
+        }
+        jediList.remove(jedi);
+    }
+
     public Jedi getJediByName(String name) throws PlanetException{
         Jedi savedJedi = null;
 
