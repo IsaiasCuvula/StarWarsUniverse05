@@ -30,14 +30,25 @@ public class StarWarsUniverse {
         System.out.println("Command: ");
     }
 
+    public void promoteJedi(String jediName, int multiplier){
+        try {
+            Jedi jedi = getJediByName(jediName);
+
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+
     public void removeJedi(String jediName, String planetName) {
         try {
             Planet savedPlanet = getPlanetByName(planetName);
             if(savedPlanet == null ){
-                System.out.printf("models.Planet %s does not exist: ", planetName);
+                System.out.printf("Planet %s does not exist: ", planetName);
                 return;
             }
             savedPlanet.removeJedi(jediName);
+            System.out.printf("Jedi %s removed successfully ", jediName);
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -51,12 +62,12 @@ public class StarWarsUniverse {
             Planet savedPlanet = getPlanetByName(planetName);
 
             if(savedPlanet == null){
-                System.out.printf("models.Planet %s does not exist %n", planetName);
+                System.out.printf("Planet %s does not exist %n", planetName);
                 return;
             }else{
                 Jedi savedJedi = getJediByName(jediName);
                 if(savedJedi != null){
-                    System.out.printf("models.Jedi %s already exist %n", jediName);
+                    System.out.printf("Jedi %s already exist %n", jediName);
                 }else{
                     Jedi newJedi = new Jedi(
                             jediName, jediRank, jediAge, saberColor, jediStrength
@@ -64,7 +75,7 @@ public class StarWarsUniverse {
                     savedPlanet.addJedi(newJedi);
                 }
             }
-            System.out.println("models.Jedi Added Successfully...");
+            System.out.println("Jedi Added Successfully...");
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -75,11 +86,11 @@ public class StarWarsUniverse {
         try{
             boolean alreadyExist = getPlanetByName(name) != null;
             if(alreadyExist){
-                System.out.printf("models.Planet %s already exist %n", name);
+                System.out.printf("Planet %s already exist %n", name);
             }else{
                 Planet planet = new Planet(name);
                 planets.add(planet);
-                System.out.printf("models.Planet %s added successfully...%n", planet.getName());
+                System.out.printf("Planet %s added successfully...%n", planet.getName());
             }
         }catch (Exception e){
             System.out.println("Something went wrong: " + e.getMessage());
@@ -98,11 +109,11 @@ public class StarWarsUniverse {
     private Planet getPlanetByName(String name) throws PlanetException {
         Planet savedPlanet = null;
         if(name == null){
-            throw new PlanetException("models.Planet name cannot be empty");
+            throw new PlanetException("Planet name cannot be empty");
         }
 
         if(name.trim().isEmpty()){
-            throw new PlanetException("models.Planet name cannot be empty");
+            throw new PlanetException("Planet name cannot be empty");
         }
         for (Planet planet: planets){
             if (planet.getName().equalsIgnoreCase(name)) {
