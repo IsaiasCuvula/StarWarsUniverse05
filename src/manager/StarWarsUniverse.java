@@ -3,6 +3,7 @@ package manager;
 import exceptions.PlanetException;
 import models.Jedi;
 import models.Planet;
+import models.Rank;
 
 import java.util.ArrayList;
 
@@ -30,9 +31,14 @@ public class StarWarsUniverse {
         System.out.println("Command: ");
     }
 
-    public void promoteJedi(String jediName, int multiplier){
+    public void promoteJedi(String jediName, double multiplier){
         try {
             Jedi jedi = getJediByName(jediName);
+            double jediStrength = jedi.getStrength();
+            double newJediStrength = jediStrength + (jediStrength* multiplier);
+            jedi.setStrength(newJediStrength);
+            Rank nextRank = jedi.getRank().getNextRank();
+            jedi.setRank(nextRank.name());
 
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e.getMessage());
