@@ -31,6 +31,63 @@ public class StarWarsUniverse {
         System.out.println("Command: ");
     }
 
+    public void printTwoPlanets(String planetName1, String planetName2){
+        try {
+            Planet p1 = getPlanetByName(planetName1);
+            Planet p2 = getPlanetByName(planetName2);
+            System.out.println(p1.getName() + " + " + p2.getName());
+
+            List<Jedi> allJedis = new ArrayList<>();
+            allJedis.addAll(p1.getJediList());
+            allJedis.addAll(p2.getJediList());
+
+            allJedis.stream()
+                    .sorted((j1, j2) -> j1.getName().compareToIgnoreCase(j2.getName()))
+                    .forEach(System.out::println);
+        }catch (Exception e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public void  printJedi(String jediName){
+        try {
+            Jedi jedi = getJediByName(jediName);
+            Planet jediPlanet = null;
+            for (Planet planet: planets){
+                if(planet.getJediList().contains(jedi)){
+                    jediPlanet = planet;
+                    break;
+                }
+            }
+            System.out.println(jedi);
+            if (jediPlanet != null) {
+                System.out.println("Inhabits planet: " + jediPlanet.getName());
+            } else {
+                System.out.println("This Jedi does not inhabit any planet.");
+            }
+        }catch (Exception e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public void  printPlanet(String planetName){
+
+       try {
+           Planet planet = getPlanetByName(planetName);
+           System.out.println("Planet: " + planet.getName() + " Jedis:");
+
+           planet.getJediList().stream()
+                   .sorted((j1, j2) -> {
+                       int byRank = j1.getRank().compareTo(j2.getRank());
+                       if (byRank != 0) return byRank;
+                       return j1.getName().compareToIgnoreCase(j2.getName());
+                   })
+                   .forEach(j -> System.out.println(j.getName()));
+       } catch (Exception e){
+           System.out.println("Something went wrong: " + e.getMessage());
+       }
+    }
+
     public void getMostUsedSaberColor(String planetName){
         try {
             Planet planet = getPlanetByName(planetName);
