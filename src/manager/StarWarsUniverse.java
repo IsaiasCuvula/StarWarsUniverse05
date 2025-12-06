@@ -268,11 +268,10 @@ public class StarWarsUniverse {
 
 
     public void createJedi(String planetName, String jediName,
-    String jediRank, int jediAge, String saberColor,
-            int jediStrength){
+        String jediRank, int jediAge, String saberColor, double jediStrength){
         try{
             Planet savedPlanet = getPlanetByName(planetName);
-            Jedi savedJedi = tryToFindJedi(jediName);
+            Jedi savedJedi = savedPlanet.getJediByName(jediName);
             if(savedJedi != null){
                 System.out.printf("Jedi %s already exist %n", jediName);
             }else{
@@ -312,12 +311,23 @@ public class StarWarsUniverse {
     }
 
     private Jedi tryToFindJedi(String name) throws PlanetException {
-       Jedi savedJedi = null;
-       for (Planet planet: planets){
-           savedJedi = planet.getJediByName(name);
-           break;
-       }
-       return savedJedi;
+        Jedi resultJedi = null;
+        if(name == null){
+            throw new PlanetException("Jedi name cannot be empty");
+        }
+
+        if(name.trim().isEmpty()){
+            throw new PlanetException("Jedi name cannot be empty");
+        }
+
+        for (Planet planet: planets){
+            Jedi savedJedi = planet.getJediByName(name);
+            if(savedJedi != null){
+                resultJedi = savedJedi;
+                break;
+            }
+        }
+       return resultJedi;
     }
 
     private Planet  getPlanetByName(String name) throws PlanetException {
