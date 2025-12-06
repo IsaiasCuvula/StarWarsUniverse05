@@ -52,8 +52,14 @@ public class Application {
                         case "get_most_used_saber_color":
                             System.out.println("get_most_used_saber_color called");
                             break;
-                        case "print":
-                            System.out.println("print called");
+                        case "print_jedi":
+                            System.out.println("print_jedi called");
+                            break;
+                        case "print_planet":
+                            System.out.println("print_planet called");
+                            break;
+                        case "print_two_planets":
+                            System.out.println("print_two_planets called");
                             break;
                         default:
                             System.out.println("Unexpected value: " + action);
