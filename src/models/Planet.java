@@ -37,9 +37,6 @@ public class Planet {
                 break;
             }
         }
-        if (savedJedi == null){
-            throw new PlanetException("Jedi does not exist");
-        }
         return savedJedi;
     }
 

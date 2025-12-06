@@ -1,9 +1,6 @@
 import manager.StarWarsUniverse;
 
 import java.util.Scanner;
-import manager.StarWarsUniverse;
-
-import java.util.Scanner;
 
 public class Application {
 
@@ -35,8 +32,8 @@ public class Application {
                     starWarsUniverse.addPlanet(planetName);
                 }
                 else if (action.equalsIgnoreCase("create_jedi") && data.length == 7) {
-                    String planetName =data[1];
-                    String jediName =data[2];
+                    String planetName = data[1];
+                    String jediName = data[2];
                     String rank = data[3];
                     int age = Integer.parseInt(data[4]);
                     String lightsaber = data[5];

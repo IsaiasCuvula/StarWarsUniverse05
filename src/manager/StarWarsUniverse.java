@@ -74,7 +74,8 @@ public class StarWarsUniverse {
 
        try {
            Planet planet = getPlanetByName(planetName);
-           System.out.println("Planet: " + planet.getName() + " Jedis:");
+           System.out.println("Planet: " + planet.getName());
+           System.out.println("Jedis: ");
 
            planet.getJediList().stream()
                    .sorted((j1, j2) -> {
@@ -271,7 +272,7 @@ public class StarWarsUniverse {
         String jediRank, int jediAge, String saberColor, double jediStrength){
         try{
             Planet savedPlanet = getPlanetByName(planetName);
-            Jedi savedJedi = savedPlanet.getJediByName(jediName);
+            Jedi savedJedi = tryToFindJedi(jediName);
             if(savedJedi != null){
                 System.out.printf("Jedi %s already exist %n", jediName);
             }else{
@@ -280,7 +281,7 @@ public class StarWarsUniverse {
                 );
                 savedPlanet.addJedi(newJedi);
             }
-            System.out.println("Jedi Added Successfully...");
+            System.out.printf("Jedi %s created Successfully in planet %s %n", jediName, planetName);
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
