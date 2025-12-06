@@ -1,5 +1,7 @@
 package models;
 
+import exceptions.JediException;
+
 public enum Rank {
     YOUNGLING,
     INITIATE,
@@ -36,13 +38,14 @@ public enum Rank {
         }
     }
 
-    public static Rank fromString(String s){
-        try{
-            if(s == null) return null;
-            String cleanString = s.trim().toUpperCase();
-            return Rank.valueOf(cleanString);
-        }catch (Exception e){
-            return null;
-        }
+    public static Rank fromString(String s) throws  JediException{
+        if(s == null) {
+           throw new JediException("Invalid Jedi Rank (YOUNGLING, INITIATE," +
+                   "PADAWAN, KNIGHT-ASPIRANT, KNIGHT, MASTER, BATTLE_MASTER and" +
+                   "GRAND_MASTER)");
+
+        };
+        String cleanString = s.trim().toUpperCase();
+        return Rank.valueOf(cleanString);
     }
 }

@@ -30,19 +30,12 @@ public class Jedi {
 
     public void setRank(String rankString) throws  JediException{
         if(rankString == null){
-            throw new JediException("Invalid Jedi models.Rank");
+            throw new JediException("Invalid Jedi Rank");
         }
         if(rankString.trim().isEmpty()){
-            throw new JediException("Invalid Jedi models.Rank");
+            throw new JediException("Invalid Jedi Rank");
         }
-        Rank rank = Rank.fromString(rankString);
-
-        if(rank == null){
-            throw new JediException("Invalid Jedi Rank (YOUNGLING, INITIATE," +
-                    "PADAWAN, KNIGHT-ASPIRANT, KNIGHT, MASTER, BATTLE_MASTER and" +
-                    "GRAND_MASTER)");
-        }
-        this.rank = rank;
+        this.rank = Rank.fromString(rankString);
     }
 
 

@@ -1,6 +1,5 @@
 package manager;
 
-import exceptions.JediException;
 import exceptions.PlanetException;
 import models.Jedi;
 import models.Planet;
@@ -31,6 +30,38 @@ public class StarWarsUniverse {
         System.out.println("13 - Exit (To close the program)");
         System.out.println("**************************************");
         System.out.println("Command: ");
+    }
+
+    public void getYoungestJedi(String planetName, String jediRank){
+        try {
+            Rank rank = Rank.fromString(jediRank);
+
+            Planet savedPlanet = getPlanetByName(planetName);
+            List<Jedi> jedis = savedPlanet.getJediList();
+            if(jedis.isEmpty()){
+                throw new PlanetException("This Planet does not have any Jedi");
+            }
+            List<Jedi> sortedJedis = jedis.stream().sorted().toList();
+            Jedi youngestJedi = null;
+
+            for (Jedi jedi: sortedJedis){
+                if(jedi.getRank() == rank){
+                    if(youngestJedi == null){
+                        youngestJedi = jedi;
+                    }
+                    if(jedi.getAge() < youngestJedi.getAge()){
+                        youngestJedi = jedi;
+                        break;
+                    }
+                }
+            }
+            if(youngestJedi == null){
+                System.out.println("There is no Jedi with Rank");
+            }
+            System.out.println(youngestJedi);
+        }catch (Exception e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     public void getStrongestJedi(String planetName){
