@@ -5,8 +5,7 @@ import models.Jedi;
 import models.Planet;
 import models.Rank;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class StarWarsUniverse {
 
@@ -32,6 +31,88 @@ public class StarWarsUniverse {
         System.out.println("Command: ");
     }
 
+    public void getMostUsedSaberColor(String planetName){
+        try {
+            Planet planet = getPlanetByName(planetName);
+            List<Jedi> jedis = planet.getJediList();
+
+            if (jedis.isEmpty()) {
+                throw new PlanetException("This planet does not have any Jedi");
+            }
+
+            Set<String> gmColors = new HashSet<>();
+            for (Jedi jedi : jedis) {
+                if (jedi.getRank() == Rank.GRAND_MASTER) {
+                    gmColors.add(jedi.getLightsaberColor());
+                }
+            }
+
+            if (gmColors.isEmpty()) {
+                System.out.println("No GRAND_MASTER exists on " + planetName);
+                return;
+            }
+
+            Map<String, Integer> colorCounts = new HashMap<>();
+            for (Jedi jedi : jedis) {
+                String color = jedi.getLightsaberColor();
+                if (gmColors.contains(color)) {
+                    colorCounts.put(color, colorCounts.getOrDefault(color, 0) + 1);
+                }
+            }
+
+            String mostUsedColor = null;
+            int maxCount = 0;
+            for (var entry : colorCounts.entrySet()) {
+                if (entry.getValue() > maxCount) {
+                    maxCount = entry.getValue();
+                    mostUsedColor = entry.getKey();
+                }
+            }
+
+            System.out.printf("Most used saber color on %s (used by at least one GRAND_MASTER) is: %s%n",
+                    planetName, mostUsedColor);
+
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public void getMostUsedSaberColor(String planetName, String jediRank){
+        try {
+            Rank rank = Rank.fromString(jediRank);
+            Planet savedPlanet = getPlanetByName(planetName);
+            List<Jedi> jedis = savedPlanet.getJediList();
+
+            if(jedis.isEmpty()){
+                throw new PlanetException("This Planet does not have any Jedi");
+            }
+            Map<String, Integer> colorCounts = new HashMap<>();
+            for (Jedi jedi: jedis){
+                if(jedi.getRank().equals(rank)){
+                    String color = jedi.getLightsaberColor();
+                    int counter = colorCounts.getOrDefault(color, 0) + 1;
+                    colorCounts.put(jedi.getLightsaberColor(), counter);
+                }
+            }
+            if (colorCounts.isEmpty()) {
+                System.out.println( "No Jedi found with rank: " + jediRank + " on " + planetName);
+            }
+
+            String mostUsedColor = null;
+            int maxCount = 0;
+
+            for (Map.Entry<String, Integer> entry : colorCounts.entrySet()) {
+                if (entry.getValue() > maxCount) {
+                    maxCount = entry.getValue();
+                    mostUsedColor = entry.getKey();
+                }
+            }
+            System.out.printf("For the Rank %s the most used saber color is: %s", mostUsedColor, maxCount);
+        }catch (Exception e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
     public void getYoungestJedi(String planetName, String jediRank){
         try {
             Rank rank = Rank.fromString(jediRank);
@@ -45,7 +126,7 @@ public class StarWarsUniverse {
             Jedi youngestJedi = null;
 
             for (Jedi jedi: sortedJedis){
-                if(jedi.getRank() == rank){
+                if(jedi.getRank().equals(rank)){
                     if(youngestJedi == null){
                         youngestJedi = jedi;
                     }
