@@ -1,5 +1,6 @@
 package manager;
 
+import exceptions.JediException;
 import exceptions.PlanetException;
 import models.Jedi;
 import models.Planet;
@@ -31,15 +32,42 @@ public class StarWarsUniverse {
         System.out.println("Command: ");
     }
 
-    public void promoteJedi(String jediName, double multiplier){
+    public void getStrongestJedi(String planetName){
         try {
+            Planet savedPlanet = getPlanetByName(planetName);
+
+        }catch (Exception e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+    public void demoteJedi(String jediName, double multiplier){
+        try {
+            if(multiplier < 0){
+                throw new PlanetException("Multiplier must positive number");
+            }
             Jedi jedi = getJediByName(jediName);
             double jediStrength = jedi.getStrength();
-            double newJediStrength = jediStrength + (jediStrength* multiplier);
+            double newJediStrength = jediStrength - (jediStrength * multiplier);
             jedi.setStrength(newJediStrength);
-            Rank nextRank = jedi.getRank().getNextRank();
+            Rank nextRank = jedi.getRank().stepDownRank();
             jedi.setRank(nextRank.name());
+        }catch (Exception e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
 
+    }
+
+    public void promoteJedi(String jediName, double multiplier){
+        try {
+            if(multiplier < 0){
+                throw new PlanetException("Multiplier must positive number");
+            }
+            Jedi jedi = getJediByName(jediName);
+            double jediStrength = jedi.getStrength();
+            double newJediStrength = jediStrength + (jediStrength * multiplier);
+            jedi.setStrength(newJediStrength);
+            Rank nextRank = jedi.getRank().stepUpRank();
+            jedi.setRank(nextRank.name());
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -49,10 +77,6 @@ public class StarWarsUniverse {
     public void removeJedi(String jediName, String planetName) {
         try {
             Planet savedPlanet = getPlanetByName(planetName);
-            if(savedPlanet == null ){
-                System.out.printf("Planet %s does not exist: ", planetName);
-                return;
-            }
             savedPlanet.removeJedi(jediName);
             System.out.printf("Jedi %s removed successfully ", jediName);
         } catch (Exception e) {
@@ -66,20 +90,14 @@ public class StarWarsUniverse {
             int jediStrength){
         try{
             Planet savedPlanet = getPlanetByName(planetName);
-
-            if(savedPlanet == null){
-                System.out.printf("Planet %s does not exist %n", planetName);
-                return;
+            Jedi savedJedi = tryToFindJedi(jediName);
+            if(savedJedi != null){
+                System.out.printf("Jedi %s already exist %n", jediName);
             }else{
-                Jedi savedJedi = getJediByName(jediName);
-                if(savedJedi != null){
-                    System.out.printf("Jedi %s already exist %n", jediName);
-                }else{
-                    Jedi newJedi = new Jedi(
-                            jediName, jediRank, jediAge, saberColor, jediStrength
-                    );
-                    savedPlanet.addJedi(newJedi);
-                }
+                Jedi newJedi = new Jedi(
+                        jediName, jediRank, jediAge, saberColor, jediStrength
+                );
+                savedPlanet.addJedi(newJedi);
             }
             System.out.println("Jedi Added Successfully...");
         } catch (Exception e) {
@@ -90,7 +108,7 @@ public class StarWarsUniverse {
 
     public void addPlanet(String name){
         try{
-            boolean alreadyExist = getPlanetByName(name) != null;
+            boolean alreadyExist = tryToFindPlanet(name) != null;
             if(alreadyExist){
                 System.out.printf("Planet %s already exist %n", name);
             }else{
@@ -104,6 +122,14 @@ public class StarWarsUniverse {
     }
 
     private Jedi getJediByName(String name) throws PlanetException {
+        Jedi savedJedi = tryToFindJedi(name);
+        if(savedJedi == null){
+           throw new PlanetException("Jedi " + name + " does not exist");
+        }
+        return savedJedi;
+    }
+
+    private Jedi tryToFindJedi(String name) throws PlanetException {
        Jedi savedJedi = null;
        for (Planet planet: planets){
            savedJedi = planet.getJediByName(name);
@@ -112,7 +138,15 @@ public class StarWarsUniverse {
        return savedJedi;
     }
 
-    private Planet getPlanetByName(String name) throws PlanetException {
+    private Planet  getPlanetByName(String name) throws PlanetException {
+        Planet savedPlanet = tryToFindPlanet(name);
+        if(savedPlanet == null){
+            throw new PlanetException("Planet " + name + " does not exist.");
+        }
+        return  savedPlanet;
+    }
+
+    private Planet tryToFindPlanet(String name) throws PlanetException {
         Planet savedPlanet = null;
         if(name == null){
             throw new PlanetException("Planet name cannot be empty");
