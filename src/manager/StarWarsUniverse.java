@@ -7,6 +7,7 @@ import models.Planet;
 import models.Rank;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StarWarsUniverse {
 
@@ -35,11 +36,23 @@ public class StarWarsUniverse {
     public void getStrongestJedi(String planetName){
         try {
             Planet savedPlanet = getPlanetByName(planetName);
+            List<Jedi> jedis = savedPlanet.getJediList();
+            if(jedis.isEmpty()){
+                throw new PlanetException("This Planet does not have any Jedi");
+            }
+            Jedi strongestJedi = jedis.getFirst();
 
+            for (Jedi jedi: jedis){
+                if(jedi.getStrength() > strongestJedi.getStrength()){
+                    strongestJedi = jedi;
+                }
+            }
+            System.out.println(strongestJedi.toString());
         }catch (Exception e){
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
+
     public void demoteJedi(String jediName, double multiplier){
         try {
             if(multiplier < 0){
