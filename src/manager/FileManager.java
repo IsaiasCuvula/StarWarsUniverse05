@@ -22,6 +22,10 @@ public class FileManager {
 
 
     public void close(){
+        if (!isOpen) {
+            System.out.println("No file is currently open.");
+            return;
+        }
         isOpen = false;
         System.out.printf("> File %s successfully closed. %n", file.getName());
     }
