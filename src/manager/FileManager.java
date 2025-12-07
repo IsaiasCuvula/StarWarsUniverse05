@@ -84,23 +84,36 @@ public class FileManager {
     }
 
     public void close() {
-        ensureFileIsOpen();
-        isOpen = false;
-        System.out.printf("Successfully closed %s%n", currentFilename);
-        currentFilename = null;
+        try {
+            ensureFileIsOpen();
+            isOpen = false;
+            System.out.printf("Successfully closed %s%n", currentFilename);
+            currentFilename = null;
+        }catch (Exception e) {
+            System.out.println(" No file is currently open : " + e.getMessage());
+        }
     }
 
     public void save(List<Planet> planets) {
-        writeContent(planets, currentFilename);
+        try {
+            ensureFileIsOpen();
+            writeContent(planets, currentFilename);
+        }catch (Exception e) {
+            System.out.println("Error in save: " + e.getMessage());
+        }
     }
 
     public void saveAs(String filename, List<Planet> planets) {
-       writeContent(planets, filename);
+        try {
+           this.open(filename);
+           writeContent(planets, filename);
+        } catch (Exception e) {
+            System.out.println("Error in saveAs: " + e.getMessage());
+        }
     }
 
     private void writeContent(List<Planet> planets, String filename) {
         try {
-            ensureFileIsOpen();
             BufferedWriter writer = this.getBufferedWriter(filename);
             for (Planet planet : planets) {
                 writer.write("Planet: " + planet.getName());
