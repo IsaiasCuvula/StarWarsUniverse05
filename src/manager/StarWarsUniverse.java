@@ -1,5 +1,6 @@
 package manager;
 
+import exceptions.JediException;
 import exceptions.PlanetException;
 import models.Jedi;
 import models.Planet;
@@ -250,11 +251,22 @@ public class StarWarsUniverse {
                 throw new PlanetException("Multiplier must positive number");
             }
             Jedi jedi = getJediByName(jediName);
+
+            if(jedi.getRank() == Rank.GRAND_MASTER){
+                throw new JediException("Jedi is already at the highest rank (GRAND_MASTER)");
+            }
+
             double jediStrength = jedi.getStrength();
             double newJediStrength = jediStrength + (jediStrength * multiplier);
+
+            if(newJediStrength > 2){
+                newJediStrength = 2;
+            }
+
             jedi.setStrength(newJediStrength);
             Rank nextRank = jedi.getRank().stepUpRank();
             jedi.setRank(nextRank.name());
+            System.out.println("Jedi " + jediName + " got promoted successfully ...");
         } catch (Exception e) {
             System.out.println("> Something went wrong: " + e.getMessage());
         }
