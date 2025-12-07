@@ -159,7 +159,7 @@ public class StarWarsUniverse {
                     mostUsedColor = entry.getKey();
                 }
             }
-            System.out.printf("For the Rank %s the most used saber color is: %s", mostUsedColor, maxCount);
+            System.out.printf("For Rank %s the most used saber color is: %s , used %d times %n", rank.name(), mostUsedColor, maxCount);
         }catch (Exception e){
             System.out.println("> Something went wrong: " + e.getMessage());
         }
