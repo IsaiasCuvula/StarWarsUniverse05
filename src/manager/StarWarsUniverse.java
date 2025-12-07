@@ -19,7 +19,7 @@ public class StarWarsUniverse {
             inputData = scanner.nextLine().trim();
 
             if (inputData.equalsIgnoreCase("exit")) {
-                System.out.println("Exiting the program...");
+                System.out.println("> Exiting the program...");
                 break;
             }
 
@@ -118,7 +118,7 @@ public class StarWarsUniverse {
                     .sorted((j1, j2) -> j1.getName().compareToIgnoreCase(j2.getName()))
                     .forEach(System.out::println);
         }catch (Exception e){
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -134,12 +134,12 @@ public class StarWarsUniverse {
             }
             System.out.println(jedi);
             if (jediPlanet != null) {
-                System.out.println("Inhabits planet: " + jediPlanet.getName());
+                System.out.println("> Inhabits planet: " + jediPlanet.getName());
             } else {
-                System.out.println("This Jedi does not inhabit any planet.");
+                System.out.println("> This Jedi does not inhabit any planet.");
             }
         }catch (Exception e){
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -164,7 +164,7 @@ public class StarWarsUniverse {
                    })
                    .forEach(j -> System.out.println(j.getName()));
        } catch (Exception e){
-           System.out.println("Something went wrong: " + e.getMessage());
+           System.out.println("> Something went wrong: " + e.getMessage());
        }
     }
 
@@ -210,7 +210,7 @@ public class StarWarsUniverse {
                     planetName, mostUsedColor);
 
         } catch (Exception e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -232,7 +232,7 @@ public class StarWarsUniverse {
                 }
             }
             if (colorCounts.isEmpty()) {
-                System.out.println( "No Jedi found with rank: " + jediRank + " on " + planetName);
+                System.out.println("No Jedi found with rank: " + jediRank + " on " + planetName);
             }
 
             String mostUsedColor = null;
@@ -246,7 +246,7 @@ public class StarWarsUniverse {
             }
             System.out.printf("For the Rank %s the most used saber color is: %s", mostUsedColor, maxCount);
         }catch (Exception e){
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -278,7 +278,7 @@ public class StarWarsUniverse {
             }
             System.out.println(youngestJedi);
         }catch (Exception e){
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -298,7 +298,7 @@ public class StarWarsUniverse {
             }
             System.out.println(strongestJedi.toString());
         }catch (Exception e){
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -314,7 +314,7 @@ public class StarWarsUniverse {
             Rank nextRank = jedi.getRank().stepDownRank();
             jedi.setRank(nextRank.name());
         }catch (Exception e){
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
 
     }
@@ -331,7 +331,7 @@ public class StarWarsUniverse {
             Rank nextRank = jedi.getRank().stepUpRank();
             jedi.setRank(nextRank.name());
         } catch (Exception e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -342,7 +342,7 @@ public class StarWarsUniverse {
             savedPlanet.removeJedi(jediName);
             System.out.printf("Jedi %s removed successfully ", jediName);
         } catch (Exception e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -362,7 +362,7 @@ public class StarWarsUniverse {
             }
             System.out.printf("Jedi %s created Successfully in planet %s %n", jediName, planetName);
         } catch (Exception e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
@@ -378,7 +378,7 @@ public class StarWarsUniverse {
                 System.out.printf("Planet %s added successfully...%n", planet.getName());
             }
         }catch (Exception e){
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 

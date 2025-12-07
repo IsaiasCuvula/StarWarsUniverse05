@@ -4,24 +4,20 @@ import java.io.File;
 
 public class FileManager {
     private final String filename =  "star_wars.txt";
+    private final File file = new File(filename);
 
-
-    public void initFile(){
+    public void open(){
         try{
-            File file = new File(filename);
-            if(file.createNewFile()){
-                System.out.println("File created successfully: " + file.getName());
-            }else {
-                System.out.println("File already exists.");
+            if(!file.exists()){
+                file.createNewFile();
+                System.out.printf("> File %s created successfully %n", file.getName());
             }
+            System.out.printf("> File %s successfully opened. %n", file.getName());
         }catch (Exception e){
-            System.out.println("Error executing init file manager: " + e.getMessage());
+            System.out.println("> Error executing init file manager: " + e.getMessage());
         }
     }
 
-    public void open(){
-
-    }
 
     public void close(){
 
