@@ -53,9 +53,13 @@ public class StarWarsUniverse {
             allJedis.addAll(p1.getJediList());
             allJedis.addAll(p2.getJediList());
 
-            allJedis.stream()
-                    .sorted((j1, j2) -> j1.getName().compareToIgnoreCase(j2.getName()))
-                    .forEach(System.out::println);
+            // Sort alphabetically by name (case-insensitive)
+            allJedis.sort(Comparator.comparing(Jedi::getName, String.CASE_INSENSITIVE_ORDER));
+
+            // Print each Jedi
+            for (Jedi jedi : allJedis) {
+                System.out.println(jedi);
+            }
         } catch (Exception e) {
             System.out.println("> Something went wrong: " + e.getMessage());
         }
