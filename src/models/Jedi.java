@@ -2,6 +2,8 @@ package models;
 
 import exceptions.JediException;
 
+import java.text.DecimalFormat;
+
 public class Jedi {
     private String name;
     private Rank rank;
@@ -50,7 +52,8 @@ public class Jedi {
         if(strength < 0 || strength > 2){
             throw new JediException("Enter a valid Jedi Strength (1 to 2)");
         }
-        this.strength = strength;
+        DecimalFormat df = new DecimalFormat("#.00");
+        this.strength = Double.parseDouble(df.format(strength));
     }
 
     public void setLightsaberColor(String lightsaberColor)  throws JediException {

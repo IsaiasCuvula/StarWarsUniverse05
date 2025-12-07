@@ -2,8 +2,7 @@ Planet: Coruscant
 Jedi: Name:Yoda, Rank:GRAND_MASTER, Age:900, Color:Green, Strength:2.0
 Jedi: Name:Obi-Wan, Rank:KNIGHT, Age:38, Color:Blue, Strength:2.0
 Planet: Tatooine
-Jedi: Name:Luke, Rank:KNIGHT, Age:23, Color:Green, Strength:1.9
-Jedi: Name:Anakin, Rank:KNIGHT_ASPIRANT, Age:19, Color:Blue, Strength:2.0
+Jedi: Name:Anakin, Rank:PADAWAN, Age:19, Color:Blue, Strength:0.0
 Planet: Lothal
-Jedi: Name:Ezra, Rank:KNIGHT, Age:14, Color:Blue, Strength:1.936
+Jedi: Name:Ezra, Rank:KNIGHT, Age:14, Color:Blue, Strength:1.94
 Jedi: Name:Kanan, Rank:MASTER, Age:25, Color:Green, Strength:2.0
