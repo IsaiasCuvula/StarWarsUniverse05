@@ -277,7 +277,7 @@ public class StarWarsUniverse {
         try {
             Planet savedPlanet = getPlanetByName(planetName);
             savedPlanet.removeJedi(jediName);
-            System.out.printf("Jedi %s removed successfully ", jediName);
+            System.out.printf("Jedi %s removed successfully %n", jediName);
         } catch (Exception e) {
             System.out.println("> Something went wrong: " + e.getMessage());
         }
