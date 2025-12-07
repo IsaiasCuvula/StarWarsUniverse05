@@ -10,103 +10,9 @@ import java.util.*;
 public class StarWarsUniverse {
 
     private final ArrayList<Planet> planets = new ArrayList<>();
-    private FileManager fileManager;
 
-    public StarWarsUniverse(FileManager fileManager){
-        this.fileManager = fileManager;
-    }
-
-    public void startProgram(Scanner scanner){
-        String inputData;
-
-        while (true) {
-            System.out.print("> ");
-            inputData = scanner.nextLine().trim();
-
-            if (inputData.equalsIgnoreCase("exit")) {
-                System.out.println("> Exiting the program...");
-                break;
-            }
-
-            if (inputData.isEmpty()) {
-                continue;
-            }
-
-            String[] data = inputData.split(" ");
-            String action = data[0];
-
-            try {
-                if (action.equalsIgnoreCase("help")) {
-                    fileManager.help();
-                } else if  (action.equalsIgnoreCase("add_planet") && data.length == 2) {
-                    String planetName = data[1];
-                    this.addPlanet(planetName);
-                }
-                else if (action.equalsIgnoreCase("create_jedi") && data.length == 7) {
-                    String planetName = data[1];
-                    String jediName = data[2];
-                    String rank = data[3];
-                    int age = Integer.parseInt(data[4]);
-                    String lightsaber = data[5];
-                    double strength = Double.parseDouble(data[6]);
-
-                    this.createJedi(
-                            planetName,jediName, rank,age, lightsaber, strength
-                    );
-                }
-                else if (action.equalsIgnoreCase("remove_jedi") && data.length == 3) {
-                    String jediName = data[1];
-                    String planetName = data[2];
-                    this.removeJedi(jediName, planetName);
-                }
-                else if (action.equalsIgnoreCase("promote_jedi") && data.length == 3) {
-                    String jediName = data[1];
-                    double multiplier = Double.parseDouble(data[2]);
-                    this.promoteJedi(jediName, multiplier);
-                }
-                else if (action.equalsIgnoreCase("demote_jedi") && data.length == 3) {
-                    String jediName = data[1];
-                    double multiplier = Double.parseDouble(data[2]);
-                    this.demoteJedi(jediName, multiplier);
-                }
-                else if (action.equalsIgnoreCase("get_strongest_jedi") && data.length == 2) {
-                    String planetName = data[1];
-                    this.getStrongestJedi(planetName);
-                }
-                else if (action.equalsIgnoreCase("get_youngest_jedi") && data.length == 3) {
-                    String planetName = data[1];
-                    String rank = data[2];
-                    this.getYoungestJedi(planetName, rank);
-                }
-                else if (action.equalsIgnoreCase("get_most_used_saber_color") && data.length == 3) {
-                    String planetName = data[1];
-                    String rank = data[2];
-                    this.getMostUsedSaberColor(planetName, rank);
-                }
-                else if (action.equalsIgnoreCase("get_most_used_saber_color") && data.length == 2) {
-                    String planetName = data[1];
-                    this.getMostUsedSaberColor(planetName);
-                }
-                else if (action.equalsIgnoreCase("print_jedi") && data.length == 2) {
-                    String jediName = data[1];
-                    this.printJedi(jediName);
-                }
-                else if (action.equalsIgnoreCase("print_planet") && data.length == 2) {
-                    String planetName = data[1];
-                    this.printPlanet(planetName);
-                }
-                else if (action.equalsIgnoreCase("print_two_planets") && data.length == 3) {
-                    String planet1 = data[1];
-                    String planet2 = data[2];
-                    this.printTwoPlanets(planet1, planet2);
-                }
-                else {
-                    System.out.println("Invalid command or wrong number of parameters.");
-                }
-            } catch (Exception e) {
-                System.out.println("Error executing command: " + e.getMessage());
-            }
-        }
+    public List<Planet> getPlanets(){
+        return  this.planets;
     }
 
     public void printTwoPlanets(String planetName1, String planetName2){
@@ -380,7 +286,6 @@ public class StarWarsUniverse {
             }else{
                 Planet planet = new Planet(name);
                 planets.add(planet);
-                fileManager.save(planet.toString());
                 System.out.printf("Planet %s added successfully...%n", planet.getName());
             }
         }catch (Exception e){

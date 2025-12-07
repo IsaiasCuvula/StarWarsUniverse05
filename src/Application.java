@@ -1,3 +1,4 @@
+import manager.ApplicationManager;
 import manager.FileManager;
 import manager.StarWarsUniverse;
 
@@ -8,12 +9,12 @@ public class Application {
 
     public static void main(String[] args) {
         FileManager fileManager = new FileManager();
-        fileManager.open();
-        StarWarsUniverse starWarsUniverse = new StarWarsUniverse(fileManager);
+        fileManager.open("stars_war.text");
+        StarWarsUniverse starWarsUniverse = new StarWarsUniverse();
+        ApplicationManager manager = new ApplicationManager(fileManager, starWarsUniverse);
         Scanner scanner = new Scanner(System.in);
-        starWarsUniverse.startProgram(scanner);
+        manager.startProgram(scanner);
         scanner.close();
-
         System.out.println("> Program closed.");
     }
 }
