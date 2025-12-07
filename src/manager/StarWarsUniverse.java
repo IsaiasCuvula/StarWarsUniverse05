@@ -10,8 +10,13 @@ import java.util.*;
 public class StarWarsUniverse {
 
     private final ArrayList<Planet> planets = new ArrayList<>();
+    private FileManager fileManager;
 
-    public void startProgram(Scanner scanner, FileManager fileManager){
+    public StarWarsUniverse(FileManager fileManager){
+        this.fileManager = fileManager;
+    }
+
+    public void startProgram(Scanner scanner){
         String inputData;
 
         while (true) {
@@ -134,16 +139,16 @@ public class StarWarsUniverse {
             }
             System.out.println(jedi);
             if (jediPlanet != null) {
-                System.out.println("> Inhabits planet: " + jediPlanet.getName());
+                System.out.println(" Inhabits planet: " + jediPlanet.getName());
             } else {
-                System.out.println("> This Jedi does not inhabit any planet.");
+                System.out.println(" This Jedi does not inhabit any planet.");
             }
         }catch (Exception e){
             System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
 
-    public void  printPlanet(String planetName){
+    public void printPlanet(String planetName){
 
        try {
            Planet planet = getPlanetByName(planetName);
@@ -375,6 +380,7 @@ public class StarWarsUniverse {
             }else{
                 Planet planet = new Planet(name);
                 planets.add(planet);
+                fileManager.save(planet.toString());
                 System.out.printf("Planet %s added successfully...%n", planet.getName());
             }
         }catch (Exception e){

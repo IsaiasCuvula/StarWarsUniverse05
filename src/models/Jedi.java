@@ -47,7 +47,7 @@ public class Jedi {
     }
 
     public void setStrength(double strength) throws JediException {
-        if(strength != 1 && strength != 2){
+        if(strength < 1 || strength > 2){
             throw new JediException("Enter a valid Jedi Strength (1 to 2)");
         }
         this.strength = strength;

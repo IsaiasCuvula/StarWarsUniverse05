@@ -8,10 +8,10 @@ public class Application {
 
     public static void main(String[] args) {
         FileManager fileManager = new FileManager();
-        StarWarsUniverse starWarsUniverse = new StarWarsUniverse();
         fileManager.open();
+        StarWarsUniverse starWarsUniverse = new StarWarsUniverse(fileManager);
         Scanner scanner = new Scanner(System.in);
-        starWarsUniverse.startProgram(scanner, fileManager);
+        starWarsUniverse.startProgram(scanner);
         scanner.close();
 
         System.out.println("> Program closed.");

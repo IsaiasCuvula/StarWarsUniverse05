@@ -1,6 +1,8 @@
 package manager;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 
 public class FileManager {
     private final String filename =  "star_wars.txt";
@@ -30,11 +32,28 @@ public class FileManager {
         System.out.printf("> File %s successfully closed. %n", file.getName());
     }
 
-    public void save(){
-
+    public void save(String content)  {
+        try {
+            if (!isOpen) {
+                System.out.println("No file is currently open.");
+                return;
+            }
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            writer.write(content);
+            writer.close();
+            System.out.printf("File %s successfully saved. %n", file.getName());
+        }catch (Exception e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     public void saveAs(){
+        if (!isOpen) {
+            System.out.println("No file is currently open.");
+            return;
+        }
+
 
     }
 
