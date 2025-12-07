@@ -133,7 +133,7 @@ public class FileManager {
 
     private void ensureFileIsOpen() {
         if (!isOpen) {
-            throw new IllegalStateException("Operation failed: No file is currently open.");
+            throw new IllegalStateException("No file is currently open.");
         }
     }
 
