@@ -24,7 +24,9 @@ public class ApplicationManager {
 
             if (inputData.equalsIgnoreCase("exit")) {
                 System.out.println("> Exiting the program...");
-                fileManager.close();
+                if(fileManager.isOpen()){
+                    fileManager.close();
+                }
                 break;
             }
 
