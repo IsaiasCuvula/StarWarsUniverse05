@@ -5,6 +5,7 @@ import java.io.File;
 public class FileManager {
     private final String filename =  "star_wars.txt";
     private final File file = new File(filename);
+    private boolean isOpen = false;
 
     public void open(){
         try{
@@ -12,6 +13,7 @@ public class FileManager {
                 file.createNewFile();
                 System.out.printf("> File %s created successfully %n", file.getName());
             }
+            isOpen = true;
             System.out.printf("> File %s successfully opened. %n", file.getName());
         }catch (Exception e){
             System.out.println("> Error executing init file manager: " + e.getMessage());
@@ -20,7 +22,8 @@ public class FileManager {
 
 
     public void close(){
-
+        isOpen = false;
+        System.out.printf("> File %s successfully closed. %n", file.getName());
     }
 
     public void save(){
