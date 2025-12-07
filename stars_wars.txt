@@ -6,3 +6,10 @@ Jedi: Name:Anakin, Rank:PADAWAN, Age:19, Color:Blue, Strength:0.9
 Planet: Lothal
 Jedi: Name:Ezra, Rank:KNIGHT, Age:14, Color:Blue, Strength:1.94
 Jedi: Name:Kanan, Rank:MASTER, Age:25, Color:Green, Strength:2.0
+Planet: Naboo
+Planet: Kamino
+Planet: Kashyyyk
+Planet: Dathomir
+Planet: Jedha
+Planet: Mustafar
+Planet: Dagobah

@@ -291,12 +291,12 @@ public class StarWarsUniverse {
             Jedi savedJedi = tryToFindJedi(jediName);
             if(savedJedi != null){
                 System.out.printf("Jedi %s already exist %n", jediName);
-            }else{
-                Jedi newJedi = new Jedi(
-                        jediName, jediRank, jediAge, saberColor, jediStrength
-                );
-                savedPlanet.addJedi(newJedi);
+                return;
             }
+            Jedi newJedi = new Jedi(jediName,
+                    jediRank, jediAge, saberColor,jediStrength
+            );
+            savedPlanet.addJedi(newJedi);
             System.out.printf("Jedi %s created Successfully in planet %s %n", jediName, planetName);
         } catch (Exception e) {
             System.out.println("> Something went wrong: " + e.getMessage());
