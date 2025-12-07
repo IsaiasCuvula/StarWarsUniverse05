@@ -174,25 +174,35 @@ public class StarWarsUniverse {
             if(jedis.isEmpty()){
                 throw new PlanetException("This Planet does not have any Jedi");
             }
-            List<Jedi> sortedJedis = jedis.stream().sorted().toList();
-            Jedi youngestJedi = null;
 
-            for (Jedi jedi: sortedJedis){
-                if(jedi.getRank().equals(rank)){
-                    if(youngestJedi == null){
-                        youngestJedi = jedi;
-                    }
-                    if(jedi.getAge() < youngestJedi.getAge()){
-                        youngestJedi = jedi;
-                        break;
+            int minAge = Integer.MAX_VALUE;
+            boolean foundRank = false;
+
+            for (Jedi jedi : jedis) {
+                if (jedi.getRank().equals(rank)) {
+                    foundRank = true;
+                    if (jedi.getAge() < minAge) {
+                        minAge = jedi.getAge();
                     }
                 }
             }
-            if(youngestJedi == null){
-                System.out.println("There is no Jedi with Rank");
+
+            if (!foundRank) {
+                System.out.println("There is no Jedi with Rank " + jediRank);
+                return;
             }
-            System.out.println(youngestJedi);
-        }catch (Exception e){
+
+            List<Jedi> youngestJedis = new ArrayList<>();
+            for (Jedi jedi : jedis) {
+                if (jedi.getRank().equals(rank) && jedi.getAge() == minAge) {
+                    youngestJedis.add(jedi);
+                }
+            }
+
+            youngestJedis.sort(Comparator.comparing(Jedi::getName));
+            System.out.println(youngestJedis.getFirst());
+
+        } catch (Exception e){
             System.out.println("> Something went wrong: " + e.getMessage());
         }
     }
