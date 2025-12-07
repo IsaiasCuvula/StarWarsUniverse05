@@ -1,27 +1,44 @@
 package manager;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-
 import models.Jedi;
 import models.Planet;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles opening, loading, saving and closing of files that store the Star Wars universe data.
+ * Uses classic java.io.Reader/Writer classes as required by the course material.
+ */
 public class FileManager {
     private String currentFilename;
     private boolean isOpen = false;
 
+    /**
+     * Returns whether a file is currently open.
+     *
+     * @return true if a file is open, false otherwise
+     */
     public boolean isOpen() {
         return this.isOpen;
     }
 
+    /**
+     * Returns the currently opened filename.
+     *
+     * @return current filename or null if none is open
+     */
     public String getCurrentFilename() {
         return currentFilename;
     }
 
+    /**
+     * Opens the specified filename. If the file does not exist it will be created.
+     * Sets the internal state to open and stores the filename.
+     *
+     * @param filename path to the file to open
+     */
     public void open(String filename) {
         try {
             File file = new File(filename);
@@ -36,6 +53,15 @@ public class FileManager {
         }
     }
 
+    /**
+     * Loads planets and their Jedis from the currently opened file.
+     * The file format expected:
+     *   Planet: <name>
+     *   Jedi: Name:<name>, Rank:<rank>, Age:<age>, Color:<color>, Strength:<strength>
+     * If no file is open this returns an empty list.
+     *
+     * @return list of loaded Planet objects (empty list if none loaded or no open file)
+     */
     public List<Planet> loadPlanets() {
         List<Planet> planets = new ArrayList<>();
         if (!isOpen) {
@@ -83,35 +109,59 @@ public class FileManager {
         return planets;
     }
 
+    /**
+     * Closes the currently opened file. After closing, no file operations except open are allowed.
+     * Prints a confirmation message on success.
+     */
     public void close() {
         try {
             ensureFileIsOpen();
             isOpen = false;
             System.out.printf("Successfully closed %s%n", currentFilename);
             currentFilename = null;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(" No file is currently open : " + e.getMessage());
         }
     }
 
+    /**
+     * Saves the provided list of planets to the currently opened file.
+     * If no file is open, prints an error message.
+     *
+     * @param planets list of planets to save
+     */
     public void save(List<Planet> planets) {
         try {
             ensureFileIsOpen();
             writeContent(planets, currentFilename);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error in save: " + e.getMessage());
         }
     }
 
+    /**
+     * Saves the provided list of planets into a new file specified by filename.
+     * This method opens the new file (creates if necessary) and writes the content.
+     *
+     * @param filename target file path
+     * @param planets list of planets to save
+     */
     public void saveAs(String filename, List<Planet> planets) {
         try {
-           this.open(filename);
-           writeContent(planets, filename);
+            this.open(filename);
+            writeContent(planets, filename);
         } catch (Exception e) {
             System.out.println("Error in saveAs: " + e.getMessage());
         }
     }
 
+    /**
+     * Internal helper that writes the textual representation of planets and their Jedis
+     * to the specified filename using BufferedWriter and FileWriter.
+     *
+     * @param planets list of planets to serialize
+     * @param filename target filename
+     */
     private void writeContent(List<Planet> planets, String filename) {
         try {
             BufferedWriter writer = this.getBufferedWriter(filename);
@@ -134,8 +184,15 @@ public class FileManager {
         }
     }
 
-    private BufferedWriter getBufferedWriter(String filename)throws Exception{
-        try{
+    /**
+     * Creates and returns a BufferedWriter for the given filename.
+     *
+     * @param filename target filename
+     * @return BufferedWriter instance
+     * @throws Exception if the writer cannot be created
+     */
+    private BufferedWriter getBufferedWriter(String filename) throws Exception {
+        try {
             FileWriter fileWriter = new FileWriter(filename);
             return new BufferedWriter(fileWriter);
         } catch (Exception e) {
@@ -144,12 +201,20 @@ public class FileManager {
         }
     }
 
+    /**
+     * Ensures that a file has been opened and is available for operations.
+     * Throws IllegalStateException if no file is open.
+     */
     private void ensureFileIsOpen() {
         if (!isOpen) {
             throw new IllegalStateException("No file is currently open.");
         }
     }
 
+    /**
+     * Prints the interactive help / menu to the console.
+     * Lists all supported commands with brief usage.
+     */
     public void help() {
         System.out.println("************************************************************");
         System.out.println("                  STAR WARS COMMANDS MENU                   ");
