@@ -9,10 +9,14 @@ import java.util.*;
 
 public class StarWarsUniverse {
 
-    private final ArrayList<Planet> planets = new ArrayList<>();
+    private List<Planet> planets = new ArrayList<>();
 
     public List<Planet> getPlanets(){
         return  this.planets;
+    }
+
+    public void setPlanets(List<Planet> planets){
+         this.planets = planets;
     }
 
     public void printTwoPlanets(String planetName1, String planetName2){

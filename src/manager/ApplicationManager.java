@@ -24,6 +24,7 @@ public class ApplicationManager {
 
             if (inputData.equalsIgnoreCase("exit")) {
                 System.out.println("> Exiting the program...");
+                fileManager.close();
                 break;
             }
 
@@ -105,6 +106,7 @@ public class ApplicationManager {
                     List<Planet> loadedPlanets = fileManager.loadPlanets();
                     planets.clear();
                     planets.addAll(loadedPlanets);
+                    starWars.setPlanets(planets);
                 }
                 else if (action.equalsIgnoreCase("close")) {
                     fileManager.close();
