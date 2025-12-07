@@ -4,57 +4,137 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+import models.Jedi;
+import models.Planet;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class FileManager {
-    private final String filename =  "star_wars.txt";
-    private final File file = new File(filename);
+    private String currentFilename;
     private boolean isOpen = false;
 
-    public void open(){
-        try{
-            if(!file.exists()){
-                file.createNewFile();
-                System.out.printf("> File %s created successfully %n", file.getName());
-            }
-            isOpen = true;
-            System.out.printf("> File %s successfully opened. %n", file.getName());
-        }catch (Exception e){
-            System.out.println("> Error executing init file manager: " + e.getMessage());
-        }
+    public boolean isOpen() {
+        return this.isOpen;
     }
 
-
-    public void close(){
-        if (!isOpen) {
-            System.out.println("No file is currently open.");
-            return;
-        }
-        isOpen = false;
-        System.out.printf("> File %s successfully closed. %n", file.getName());
+    public String getCurrentFilename() {
+        return currentFilename;
     }
 
-    public void save(String content)  {
+    public void open(String filename) {
         try {
-            if (!isOpen) {
-                System.out.println("No file is currently open.");
-                return;
+            File file = new File(filename);
+            if (!file.exists()) {
+                file.createNewFile();
             }
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter writer = new BufferedWriter(fileWriter);
-            writer.write(content);
-            writer.close();
-            System.out.printf("File %s successfully saved. %n", file.getName());
-        }catch (Exception e){
-            System.out.println("Something went wrong: " + e.getMessage());
+            currentFilename = filename;
+            isOpen = true;
+            System.out.printf("Successfully opened %s%n", filename);
+        } catch (Exception e) {
+            System.out.println("Error opening file: " + e.getMessage());
         }
     }
 
-    public void saveAs(){
+    public List<Planet> loadPlanets() {
+        List<Planet> planets = new ArrayList<>();
         if (!isOpen) {
-            System.out.println("No file is currently open.");
-            return;
+            return planets;
         }
 
+        try {
+            File file = new File(currentFilename);
+            if (!file.exists() || file.length() == 0) {
+                return planets;
+            }
 
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            Planet currentPlanet = null;
+
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                if (line.startsWith("Planet:")) {
+                    String planetName = line.substring(7).trim();
+                    currentPlanet = new Planet(planetName);
+                    planets.add(currentPlanet);
+                } else if (line.startsWith("Jedi:") && currentPlanet != null) {
+                    String[] parts = line.substring(5).trim().split(",");
+                    if (parts.length == 5) {
+                        String name = parts[0].split(":")[1].trim();
+                        String rank = parts[1].split(":")[1].trim();
+                        int age = Integer.parseInt(parts[2].split(":")[1].trim());
+                        String color = parts[3].split(":")[1].trim();
+                        double strength = Double.parseDouble(parts[4].split(":")[1].trim());
+
+                        Jedi jedi = new Jedi(name, rank, age, color, strength);
+                        currentPlanet.addJedi(jedi);
+                    }
+                }
+            }
+            reader.close();
+        } catch (Exception e) {
+            System.out.println("Error loading planets: " + e.getMessage());
+        }
+        return planets;
+    }
+
+    public void close() {
+        ensureFileIsOpen();
+        isOpen = false;
+        System.out.printf("Successfully closed %s%n", currentFilename);
+        currentFilename = null;
+    }
+
+    public void save(List<Planet> planets) {
+        writeContent(planets, currentFilename);
+    }
+
+    public void saveAs(String filename, List<Planet> planets) {
+       writeContent(planets, filename);
+    }
+
+    private void writeContent(List<Planet> planets, String filename) {
+        try {
+            ensureFileIsOpen();
+            BufferedWriter writer = this.getBufferedWriter(filename);
+            for (Planet planet : planets) {
+                writer.write("Planet: " + planet.getName());
+                writer.newLine();
+                for (Jedi jedi : planet.getJediList()) {
+                    writer.write("Jedi: Name:" + jedi.getName() +
+                            ", Rank:" + jedi.getRank() +
+                            ", Age:" + jedi.getAge() +
+                            ", Color:" + jedi.getLightsaberColor() +
+                            ", Strength:" + jedi.getStrength());
+                    writer.newLine();
+                }
+            }
+            writer.close();
+            System.out.printf("Successfully saved %s%n", filename);
+        } catch (Exception e) {
+            System.out.println("Error saving file: " + e.getMessage());
+        }
+    }
+
+    private BufferedWriter getBufferedWriter(String filename)throws Exception{
+        try{
+            FileWriter fileWriter = new FileWriter(filename);
+            return new BufferedWriter(fileWriter);
+        } catch (Exception e) {
+            System.out.println("Error saving file: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    private void ensureFileIsOpen() {
+        if (!isOpen) {
+            throw new IllegalStateException("Operation failed: No file is currently open.");
+        }
     }
 
     public void help() {
@@ -79,7 +159,7 @@ public class FileManager {
         System.out.println(" 9. Most Used Saber (All): get_most_used_saber_color <planet_name>");
         System.out.println("10. Show Planet Details: print_planet <planet_name>");
         System.out.println("11. Show Jedi Details:   print_jedi <jedi_name>");
-        System.out.println("12. Compare Planets:     print_jedis_for_planets <planet1> <planet2>");
+        System.out.println("12. Compare Planets:     print_two_planets <planet1> <planet2>");
         System.out.println();
 
         System.out.println("  FILE & PROGRAM CONTROL (System Commands)");
@@ -92,5 +172,4 @@ public class FileManager {
         System.out.println("18. Save As:           saveas <file>");
         System.out.println("************************************************************");
     }
-
 }
