@@ -1,15 +1,38 @@
 Planet: Coruscant
 Jedi: Name:Yoda, Rank:GRAND_MASTER, Age:900, Color:Green, Strength:2.0
 Jedi: Name:Obi-Wan, Rank:KNIGHT, Age:38, Color:Blue, Strength:2.0
+Jedi: Name:Mace-Windu, Rank:MASTER, Age:53, Color:Purple, Strength:2.0
+Jedi: Name:Ki-Adi-Mundi, Rank:MASTER, Age:60, Color:Blue, Strength:1.9
+Jedi: Name:Plo-Koon, Rank:MASTER, Age:55, Color:Orange, Strength:1.9
+Jedi: Name:Saesee-Tiin, Rank:KNIGHT, Age:40, Color:Green, Strength:1.8
 Planet: Tatooine
 Jedi: Name:Anakin, Rank:PADAWAN, Age:19, Color:Blue, Strength:0.9
+Jedi: Name:Luke, Rank:KNIGHT, Age:23, Color:Green, Strength:1.9
+Jedi: Name:Ahsoka, Rank:PADAWAN, Age:17, Color:Green, Strength:1.7
 Planet: Lothal
 Jedi: Name:Ezra, Rank:KNIGHT, Age:14, Color:Blue, Strength:1.94
 Jedi: Name:Kanan, Rank:MASTER, Age:25, Color:Green, Strength:2.0
+Jedi: Name:Depa-Billaba, Rank:MASTER, Age:39, Color:Blue, Strength:1.85
 Planet: Naboo
+Jedi: Name:Qui-Gon, Rank:MASTER, Age:48, Color:Green, Strength:1.95
+Jedi: Name:Jarik, Rank:PADAWAN, Age:16, Color:Yellow, Strength:1.4
+Jedi: Name:Reva, Rank:INITIATE, Age:13, Color:Blue, Strength:1.3
 Planet: Kamino
+Jedi: Name:Shaak-Ti, Rank:MASTER, Age:45, Color:Red, Strength:1.85
+Jedi: Name:Tera-Sinube, Rank:KNIGHT, Age:70, Color:Blue, Strength:1.7
+Jedi: Name:Jocasta-Nu, Rank:MASTER, Age:75, Color:Blue, Strength:1.5
 Planet: Kashyyyk
+Jedi: Name:Yaddle, Rank:MASTER, Age:477, Color:Green, Strength:1.9
+Jedi: Name:Gungi, Rank:INITIATE, Age:12, Color:Green, Strength:1.0
 Planet: Dathomir
+Jedi: Name:Merrin, Rank:INITIATE, Age:18, Color:Red, Strength:1.3
+Jedi: Name:Arden, Rank:KNIGHT_ASPIRANT, Age:21, Color:Blue, Strength:1.5
 Planet: Jedha
+Jedi: Name:Chirrut, Rank:KNIGHT, Age:52, Color:Blue, Strength:1.7
+Jedi: Name:Tanoor, Rank:PADAWAN, Age:19, Color:Green, Strength:1.5
 Planet: Mustafar
+Jedi: Name:Ferren-Barr, Rank:KNIGHT, Age:28, Color:Blue, Strength:1.8
+Jedi: Name:Serra-Keto, Rank:KNIGHT, Age:27, Color:Green, Strength:1.75
 Planet: Dagobah
+Jedi: Name:Bultar-Swan, Rank:KNIGHT, Age:34, Color:Blue, Strength:1.8
+Jedi: Name:Halsey, Rank:MASTER, Age:50, Color:Green, Strength:1.85
