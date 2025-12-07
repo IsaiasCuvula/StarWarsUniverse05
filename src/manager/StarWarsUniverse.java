@@ -20,6 +20,7 @@ public class StarWarsUniverse {
             inputData = scanner.nextLine().trim();
 
             if (inputData.equalsIgnoreCase("exit")) {
+                System.out.println("Exiting the program...");
                 break;
             }
 
