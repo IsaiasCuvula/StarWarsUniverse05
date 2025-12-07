@@ -5,5 +5,5 @@ Planet: Tatooine
 Jedi: Name:Luke, Rank:KNIGHT, Age:23, Color:Green, Strength:1.9
 Jedi: Name:Anakin, Rank:KNIGHT_ASPIRANT, Age:19, Color:Blue, Strength:2.0
 Planet: Lothal
-Jedi: Name:Ezra, Rank:PADAWAN, Age:14, Color:Blue, Strength:0.4
+Jedi: Name:Ezra, Rank:PADAWAN, Age:14, Color:Blue, Strength:2.0
 Jedi: Name:Kanan, Rank:KNIGHT, Age:25, Color:Green, Strength:1.9
