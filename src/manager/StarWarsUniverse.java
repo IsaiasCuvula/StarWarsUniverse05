@@ -13,7 +13,7 @@ import java.util.*;
  * This class is responsible for creating, searching, modifying and printing information
  * about planets and Jedi, as well as performing various statistical operations.
  */
-public class StarWarsUniverse {
+public class StarWarsUniverse implements Universe {
 
     /** List of all planets currently stored in memory. */
     private List<Planet> planets = new ArrayList<>();
@@ -43,6 +43,7 @@ public class StarWarsUniverse {
      * @param planetName1 first planet
      * @param planetName2 second planet
      */
+    @Override
     public void printTwoPlanets(String planetName1, String planetName2) {
         try {
             Planet p1 = getPlanetByName(planetName1);
@@ -71,6 +72,7 @@ public class StarWarsUniverse {
      *
      * @param jediName name of the Jedi to print
      */
+    @Override
     public void printJedi(String jediName) {
         try {
             Jedi jedi = getJediByName(jediName);
@@ -99,6 +101,7 @@ public class StarWarsUniverse {
      *
      * @param planetName name of the planet to print
      */
+    @Override
     public void printPlanet(String planetName) {
         try {
             Planet planet = getPlanetByName(planetName);
@@ -130,6 +133,7 @@ public class StarWarsUniverse {
      *
      * @param planetName name of the planet
      */
+    @Override
     public void getMostUsedSaberColor(String planetName) {
         try {
             Planet planet = getPlanetByName(planetName);
@@ -184,6 +188,7 @@ public class StarWarsUniverse {
      * @param planetName name of the planet
      * @param jediRank rank filter
      */
+    @Override
     public void getMostUsedSaberColor(String planetName, String jediRank) {
         try {
             Rank rank = Rank.fromString(jediRank);
@@ -231,6 +236,7 @@ public class StarWarsUniverse {
      * @param planetName name of the planet
      * @param jediRank rank filter
      */
+    @Override
     public void getYoungestJedi(String planetName, String jediRank) {
         try {
             Rank rank = Rank.fromString(jediRank);
@@ -278,6 +284,7 @@ public class StarWarsUniverse {
      *
      * @param planetName name of the planet
      */
+    @Override
     public void getStrongestJedi(String planetName) {
         try {
             Planet savedPlanet = getPlanetByName(planetName);
@@ -308,6 +315,7 @@ public class StarWarsUniverse {
      * @param jediName name of the Jedi
      * @param multiplier strength decrease percentage
      */
+    @Override
     public void demoteJedi(String jediName, double multiplier) {
         try {
             if (multiplier < 0) {
@@ -332,6 +340,7 @@ public class StarWarsUniverse {
      * @param jediName name of the Jedi
      * @param multiplier strength increase percentage
      */
+    @Override
     public void promoteJedi(String jediName, double multiplier) {
         try {
             if (multiplier < 0) {
@@ -368,6 +377,7 @@ public class StarWarsUniverse {
      * @param jediName name of the Jedi to remove
      * @param planetName planet to remove the Jedi from
      */
+    @Override
     public void removeJedi(String jediName, String planetName) {
         try {
             Planet savedPlanet = getPlanetByName(planetName);
@@ -388,6 +398,7 @@ public class StarWarsUniverse {
      * @param saberColor lightsaber color
      * @param jediStrength Jedi strength (1 to 2)
      */
+    @Override
     public void createJedi(String planetName, String jediName,
                            String jediRank, int jediAge, String saberColor, double jediStrength) {
         try {
@@ -414,6 +425,7 @@ public class StarWarsUniverse {
      *
      * @param name name of the planet
      */
+    @Override
     public void addPlanet(String name) {
         try {
             boolean alreadyExist = tryToFindPlanet(name) != null;
