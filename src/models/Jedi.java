@@ -1,7 +1,6 @@
 package models;
 
 import exceptions.JediException;
-
 import java.text.DecimalFormat;
 
 public class Jedi {

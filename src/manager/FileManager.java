@@ -11,34 +11,37 @@ import java.util.List;
  * Handles opening, loading, saving and closing of files that store the Star Wars universe data.
  * Uses classic java.io.Reader/Writer classes as required by the course material.
  */
-public class FileManager {
+public class FileManager implements DataStorage {
     private String currentFilename;
     private boolean isOpen = false;
-
+    
     /**
      * Returns whether a file is currently open.
      *
      * @return true if a file is open, false otherwise
      */
+    @Override
     public boolean isOpen() {
         return this.isOpen;
     }
-
+    
     /**
      * Returns the currently opened filename.
      *
      * @return current filename or null if none is open
      */
+    @Override
     public String getCurrentFilename() {
         return currentFilename;
     }
-
+    
     /**
      * Opens the specified filename. If the file does not exist it will be created.
      * Sets the internal state to open and stores the filename.
      *
      * @param filename path to the file to open
      */
+    @Override
     public void open(String filename) {
         try {
             File file = new File(filename);
@@ -52,7 +55,7 @@ public class FileManager {
             System.out.println("Error opening file: " + e.getMessage());
         }
     }
-
+    
     /**
      * Loads planets and their Jedis from the currently opened file.
      * The file format expected:
@@ -62,28 +65,29 @@ public class FileManager {
      *
      * @return list of loaded Planet objects (empty list if none loaded or no open file)
      */
+    @Override
     public List<Planet> loadPlanets() {
         List<Planet> planets = new ArrayList<>();
         if (!isOpen) {
             return planets;
         }
-
+        
         try {
             File file = new File(currentFilename);
             if (!file.exists() || file.length() == 0) {
                 return planets;
             }
-
+            
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             Planet currentPlanet = null;
-
+            
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
                 if (line.isEmpty()) {
                     continue;
                 }
-
+                
                 if (line.startsWith("Planet:")) {
                     String planetName = line.substring(7).trim();
                     currentPlanet = new Planet(planetName);
@@ -96,7 +100,7 @@ public class FileManager {
                         int age = Integer.parseInt(parts[2].split(":")[1].trim());
                         String color = parts[3].split(":")[1].trim();
                         double strength = Double.parseDouble(parts[4].split(":")[1].trim());
-
+                        
                         Jedi jedi = new Jedi(name, rank, age, color, strength);
                         currentPlanet.addJedi(jedi);
                     }
@@ -108,11 +112,12 @@ public class FileManager {
         }
         return planets;
     }
-
+    
     /**
      * Closes the currently opened file. After closing, no file operations except open are allowed.
      * Prints a confirmation message on success.
      */
+    @Override
     public void close() {
         try {
             ensureFileIsOpen();
@@ -123,13 +128,14 @@ public class FileManager {
             System.out.println(" No file is currently open : " + e.getMessage());
         }
     }
-
+    
     /**
      * Saves the provided list of planets to the currently opened file.
      * If no file is open, prints an error message.
      *
      * @param planets list of planets to save
      */
+    @Override
     public void save(List<Planet> planets) {
         try {
             ensureFileIsOpen();
@@ -138,7 +144,7 @@ public class FileManager {
             System.out.println("Error in save: " + e.getMessage());
         }
     }
-
+    
     /**
      * Saves the provided list of planets into a new file specified by filename.
      * This method opens the new file (creates if necessary) and writes the content.
@@ -146,6 +152,7 @@ public class FileManager {
      * @param filename target file path
      * @param planets list of planets to save
      */
+    @Override
     public void saveAs(String filename, List<Planet> planets) {
         try {
             this.open(filename);
@@ -154,7 +161,7 @@ public class FileManager {
             System.out.println("Error in saveAs: " + e.getMessage());
         }
     }
-
+    
     /**
      * Internal helper that writes the textual representation of planets and their Jedis
      * to the specified filename using BufferedWriter and FileWriter.
@@ -170,10 +177,10 @@ public class FileManager {
                 writer.newLine();
                 for (Jedi jedi : planet.getJediList()) {
                     writer.write("Jedi: Name:" + jedi.getName() +
-                            ", Rank:" + jedi.getRank() +
-                            ", Age:" + jedi.getAge() +
-                            ", Color:" + jedi.getLightsaberColor() +
-                            ", Strength:" + jedi.getStrength());
+                                         ", Rank:" + jedi.getRank() +
+                                         ", Age:" + jedi.getAge() +
+                                         ", Color:" + jedi.getLightsaberColor() +
+                                         ", Strength:" + jedi.getStrength());
                     writer.newLine();
                 }
             }
@@ -183,7 +190,7 @@ public class FileManager {
             System.out.println("Error saving file: " + e.getMessage());
         }
     }
-
+    
     /**
      * Creates and returns a BufferedWriter for the given filename.
      *
@@ -200,7 +207,7 @@ public class FileManager {
             throw e;
         }
     }
-
+    
     /**
      * Ensures that a file has been opened and is available for operations.
      * Throws IllegalStateException if no file is open.
@@ -210,16 +217,17 @@ public class FileManager {
             throw new IllegalStateException("No file is currently open.");
         }
     }
-
+    
     /**
      * Prints the interactive help / menu to the console.
      * Lists all supported commands with brief usage.
      */
+    @Override
     public void help() {
         System.out.println("************************************************************");
         System.out.println("                  STAR WARS COMMANDS MENU                   ");
         System.out.println("************************************************************");
-
+        
         System.out.println("  JEDI MANAGEMENT (Creation, Removal, Rank)");
         System.out.println("------------------------------------------------------------");
         System.out.println(" 1. Add Planet:         add_planet <planet_name>");
@@ -228,7 +236,7 @@ public class FileManager {
         System.out.println(" 4. Promote Jedi:       promote_jedi <jedi_name> <multiplier>");
         System.out.println(" 5. Demote Jedi:        demote_jedi <jedi_name> <multiplier>");
         System.out.println();
-
+        
         System.out.println("  PLANET & QUERY OPERATIONS (Statistics and Details)");
         System.out.println("------------------------------------------------------------");
         System.out.println(" 6. Get Strongest Jedi: get_strongest_jedi <planet_name>");
@@ -239,7 +247,7 @@ public class FileManager {
         System.out.println("11. Show Jedi Details:   print_jedi <jedi_name>");
         System.out.println("12. Compare Planets:     print_two_planets <planet1> <planet2>");
         System.out.println();
-
+        
         System.out.println("  FILE & PROGRAM CONTROL (System Commands)");
         System.out.println("------------------------------------------------------------");
         System.out.println("13. Exit Program:      exit");
