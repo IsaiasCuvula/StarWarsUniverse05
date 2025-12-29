@@ -8,19 +8,27 @@ import models.Planet;
 
 import java.util.List;
 
+/**
+ * Opens a file and loads planets into memory.
+ */
 public class OpenCommand extends Command {
-   
+    
+    /**
+     * Creates the open command.
+     */
     public OpenCommand(Universe universe, DataStorage storage) {
         super(universe, storage);
     }
     
+    /**
+     * Executes file loading logic.
+     */
     @Override
     public void execute(String[] args) throws Exception {
         validateArgsCount(args, 2);
         String filename = args[1];
         
         storage.open(filename);
-        
         List<Planet> loadedPlanets = storage.loadPlanets();
         //Close immediately to avoid memory leak
         storage.close();
@@ -41,7 +49,7 @@ public class OpenCommand extends Command {
                 currentMemoryPlanets.add(loaded);
             }
         }
-    
+        
         universe.setPlanets(currentMemoryPlanets);
         universe.setCurrentFilename(filename);
         
@@ -49,10 +57,13 @@ public class OpenCommand extends Command {
                 filename, loadedPlanets.size());
     }
     
+    /**
+     * Searches a planet by name.
+     */
     private Planet findPlanetInList(List<Planet> list, String name) {
         Planet result = null;
-        for(Planet p: list){
-            if(p.getName().equalsIgnoreCase(name)){
+        for (Planet p : list) {
+            if (p.getName().equalsIgnoreCase(name)) {
                 result = p;
                 break;
             }

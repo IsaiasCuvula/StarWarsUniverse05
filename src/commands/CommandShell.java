@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * CommandShell coordinates command execution between the CLI and the StarWarsUniverse.
- * It parses input strings and calls the appropriate StarWarsUniverse or FileManager methods.
+ * CommandShell coordinates command execution between the CLI and the Universe.
+ * It parses input strings and calls the appropriate Universe or FileManager methods.
  */
 public class CommandShell {
     private final DataStorage storage;
@@ -18,7 +18,7 @@ public class CommandShell {
     private final Map<String, Command> commands;
 
     /**
-     * Constructs an CommandShell with the provided FileManager and StarWarsUniverse instances.
+     * Constructs an CommandShell with the provided FileManager and Universe instances.
      *
      * @param storage Storage instance used for file operations
      * @param universe Universe instance used for in-memory operations
@@ -53,7 +53,11 @@ public class CommandShell {
         }
     }
     
-    
+    /**
+     * Processes a single command input.
+     *
+     * @param input user input
+     */
     private void processCommand(String input){
         String[] data = input.split("\\s+");
         String action = data[0];
@@ -69,6 +73,9 @@ public class CommandShell {
         }
     }
     
+    /**
+     * Handles program termination.
+     */
     private void handleExit() {
         try {
             System.out.println("> Exiting the program...");

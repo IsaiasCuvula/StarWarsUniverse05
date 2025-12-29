@@ -37,6 +37,14 @@ public abstract class Command {
         }
     }
     
+    /**
+     * Parses an integer value.
+     *
+     * @param value string value
+     * @param fieldName field name for error message
+     * @return parsed integer
+     * @throws Exception if parsing fails
+     */
     protected int parseInt(String value, String fieldName) throws Exception {
         try {
             return Integer.parseInt(value);
@@ -45,7 +53,14 @@ public abstract class Command {
         }
     }
     
-  
+    /**
+     * Parses a double value.
+     *
+     * @param value string value
+     * @param fieldName field name for error message
+     * @return parsed double
+     * @throws Exception if parsing fails
+     */
     protected double parseDouble(String value, String fieldName) throws Exception {
         try {
             return Double.parseDouble(value);

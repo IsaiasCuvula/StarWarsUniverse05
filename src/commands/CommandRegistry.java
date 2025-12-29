@@ -8,7 +8,19 @@ import universes.Universe;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Registers and initializes all available commands.
+ */
 public class CommandRegistry {
+    
+    /**
+     * Creates the command map used by the shell.
+     *
+     * @param storage data storage instance
+     * @param universe universe instance
+     * @return map of command names to command objects
+     */
     public static Map<String, Command> initialize(DataStorage storage, Universe universe) {
         Map<String, Command> commands = new HashMap<>();
         commands.put("open", new OpenCommand(universe, storage));
