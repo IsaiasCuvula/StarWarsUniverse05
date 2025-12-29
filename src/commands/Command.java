@@ -36,4 +36,21 @@ public abstract class Command {
             throw new Exception("Expected " + expected + " arguments");
         }
     }
+    
+    protected int parseInt(String value, String fieldName) throws Exception {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new Exception("The field '" + fieldName + "' must be a whole number.");
+        }
+    }
+    
+  
+    protected double parseDouble(String value, String fieldName) throws Exception {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            throw new Exception("The field '" + fieldName + "' must be a decimal number (e.g., 1.5).");
+        }
+    }
 }
