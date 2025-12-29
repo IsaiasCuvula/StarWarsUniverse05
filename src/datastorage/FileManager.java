@@ -124,7 +124,6 @@ public class FileManager implements DataStorage {
         try {
             if (!isOpen) return;
             isOpen = false;
-            System.out.printf("Successfully closed %s%n", currentFilename);
         } catch (Exception e) {
             System.out.println(" No file is currently open : " + e.getMessage());
         }

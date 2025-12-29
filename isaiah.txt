@@ -1,3 +1,8 @@
+Planet: Tatooine
+Jedi: Name:IBMC, Rank:KNIGHT, Age:23, Color:Green, Strength:1.9
+Jedi: Name:Anakin, Rank:PADAWAN, Age:19, Color:Blue, Strength:0.9
+Jedi: Name:Luke, Rank:KNIGHT, Age:23, Color:Green, Strength:1.9
+Jedi: Name:Ahsoka, Rank:PADAWAN, Age:17, Color:Green, Strength:1.7
 Planet: Coruscant
 Jedi: Name:Yoda, Rank:GRAND_MASTER, Age:900, Color:Green, Strength:2.0
 Jedi: Name:Obi-Wan, Rank:KNIGHT, Age:38, Color:Blue, Strength:2.0
@@ -5,10 +10,6 @@ Jedi: Name:Mace-Windu, Rank:MASTER, Age:53, Color:Purple, Strength:2.0
 Jedi: Name:Ki-Adi-Mundi, Rank:MASTER, Age:60, Color:Blue, Strength:1.9
 Jedi: Name:Plo-Koon, Rank:MASTER, Age:55, Color:Orange, Strength:1.9
 Jedi: Name:Saesee-Tiin, Rank:KNIGHT, Age:40, Color:Green, Strength:1.8
-Planet: Tatooine
-Jedi: Name:Anakin, Rank:PADAWAN, Age:19, Color:Blue, Strength:0.9
-Jedi: Name:Luke, Rank:KNIGHT, Age:23, Color:Green, Strength:1.9
-Jedi: Name:Ahsoka, Rank:PADAWAN, Age:17, Color:Green, Strength:1.7
 Planet: Lothal
 Jedi: Name:Ezra, Rank:KNIGHT, Age:14, Color:Blue, Strength:1.94
 Jedi: Name:Kanan, Rank:MASTER, Age:25, Color:Green, Strength:2.0
