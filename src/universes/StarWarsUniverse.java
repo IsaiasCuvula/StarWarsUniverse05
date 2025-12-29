@@ -1,4 +1,4 @@
-package manager;
+package universes;
 
 import exceptions.JediException;
 import exceptions.PlanetException;

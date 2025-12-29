@@ -1,7 +1,7 @@
 package commands;
 
 import datastorage.DataStorage;
-import manager.Universe;
+import universes.Universe;
 
 /**
  * Abstract base class for all commands in the application.

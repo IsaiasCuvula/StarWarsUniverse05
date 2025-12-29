@@ -2,7 +2,7 @@ package commands.universe;
 
 import commands.Command;
 import datastorage.DataStorage;
-import manager.Universe;
+import universes.Universe;
 
 
 public class CreateJediCommand extends Command {

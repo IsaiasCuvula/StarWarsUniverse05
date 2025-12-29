@@ -2,7 +2,7 @@ package commands.universe;
 
 import commands.Command;
 import datastorage.DataStorage;
-import manager.Universe;
+import universes.Universe;
 
 public class DemoteJediCommand extends Command {
     public DemoteJediCommand(Universe universe, DataStorage storage) {

@@ -2,7 +2,7 @@ package commands.datastorage;
 
 import commands.Command;
 import datastorage.DataStorage;
-import manager.Universe;
+import universes.Universe;
 
 public class SaveAsCommand extends Command {
     public SaveAsCommand(Universe universe, DataStorage storage) {

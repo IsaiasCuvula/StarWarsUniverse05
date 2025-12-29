@@ -2,7 +2,7 @@ package commands.universe;
 
 import commands.Command;
 import datastorage.DataStorage;
-import manager.Universe;
+import universes.Universe;
 
 public class PrintPlanetCommand extends Command {
     public PrintPlanetCommand(Universe universe, DataStorage storage) {

@@ -1,17 +1,16 @@
-package manager;
+package commands;
 
-import commands.Command;
-import commands.CommandRegistry;
 import datastorage.DataStorage;
+import universes.Universe;
 
 import java.util.Map;
 import java.util.Scanner;
 
 /**
- * ApplicationManager coordinates command execution between the CLI and the StarWarsUniverse.
+ * CommandShell coordinates command execution between the CLI and the StarWarsUniverse.
  * It parses input strings and calls the appropriate StarWarsUniverse or FileManager methods.
  */
-public class ApplicationManager {
+public class CommandShell {
     private final DataStorage storage;
     private final Scanner scanner;
     private boolean running;
@@ -19,12 +18,12 @@ public class ApplicationManager {
     private final Map<String, Command> commands;
 
     /**
-     * Constructs an ApplicationManager with the provided FileManager and StarWarsUniverse instances.
+     * Constructs an CommandShell with the provided FileManager and StarWarsUniverse instances.
      *
      * @param storage Storage instance used for file operations
      * @param universe Universe instance used for in-memory operations
      */
-    public ApplicationManager(DataStorage storage, Universe universe) {
+    public CommandShell(DataStorage storage, Universe universe) {
         this.scanner = new Scanner(System.in);
         this.storage = storage;
         this.running = true;

@@ -50,11 +50,9 @@ public class FileManager implements DataStorage {
                if(!result){
                    System.out.printf("File %s failed to be created %n", filename);
                }
-               System.out.printf("File %s successfully created %n", filename);
             }
             currentFilename = filename;
             isOpen = true;
-            System.out.printf("Successfully opened %s%n", filename);
         } catch (Exception e) {
             System.out.println("Error opening file: " + e.getMessage());
         }

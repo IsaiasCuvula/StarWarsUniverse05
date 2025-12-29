@@ -1,4 +1,4 @@
-package manager;
+package universes;
 
 import models.Planet;
 import java.util.List;

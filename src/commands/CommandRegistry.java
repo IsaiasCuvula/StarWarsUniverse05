@@ -3,7 +3,7 @@ package commands;
 import commands.datastorage.*;
 import commands.universe.*;
 import datastorage.DataStorage;
-import manager.Universe;
+import universes.Universe;
 
 import java.util.HashMap;
 import java.util.Map;
