@@ -5,6 +5,9 @@ import java.util.List;
 
 public interface Universe {
     
+    String getCurrentFilename();
+    void setCurrentFilename(String filename);
+    
     List<Planet> getPlanets();
     
     void setPlanets(List<Planet> planets);

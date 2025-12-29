@@ -122,10 +122,9 @@ public class FileManager implements DataStorage {
     @Override
     public void close() {
         try {
-            ensureFileIsOpen();
+            if (!isOpen) return;
             isOpen = false;
             System.out.printf("Successfully closed %s%n", currentFilename);
-            currentFilename = null;
         } catch (Exception e) {
             System.out.println(" No file is currently open : " + e.getMessage());
         }
@@ -139,9 +138,17 @@ public class FileManager implements DataStorage {
      */
     @Override
     public void save(List<Planet> planets) {
+        if (currentFilename == null) {
+            System.out.println("> Error: No file is currently opened. Use 'open <filename>'.");
+            return;
+        }
+        
         try {
-            ensureFileIsOpen();
+            if (!isOpen) {
+                this.open(currentFilename);
+            }
             writeContent(planets, currentFilename);
+            this.close();
         } catch (Exception e) {
             System.out.println("Error in save: " + e.getMessage());
         }
@@ -156,12 +163,14 @@ public class FileManager implements DataStorage {
      */
     @Override
     public void saveAs(String filename, List<Planet> planets) {
-        try {
-            this.open(filename);
-            writeContent(planets, filename);
-        } catch (Exception e) {
-            System.out.println("Error in saveAs: " + e.getMessage());
-        }
+         try {
+             this.currentFilename = filename;
+             this.open(filename);
+             writeContent(planets, filename);
+             this.close();
+         } catch (Exception e) {
+             System.out.println("Error in saveAs: " + e.getMessage());
+         }
     }
     
     /**
@@ -210,15 +219,6 @@ public class FileManager implements DataStorage {
         }
     }
     
-    /**
-     * Ensures that a file has been opened and is available for operations.
-     * Throws IllegalStateException if no file is open.
-     */
-    private void ensureFileIsOpen() {
-        if (!isOpen) {
-            throw new IllegalStateException("No file is currently open.");
-        }
-    }
     
     /**
      * Prints the interactive help / menu to the console.

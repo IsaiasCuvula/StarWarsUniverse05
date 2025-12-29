@@ -17,6 +17,17 @@ public class StarWarsUniverse implements Universe {
 
     /** List of all planets currently stored in memory. */
     private List<Planet> planets = new ArrayList<>();
+    private String currentFilename; // Estado em memória
+    
+    @Override
+    public String getCurrentFilename() {
+        return this.currentFilename;
+    }
+    
+    @Override
+    public void setCurrentFilename(String filename) {
+        this.currentFilename = filename;
+    }
 
     /**
      * Returns the list of planets in the universe.
