@@ -24,7 +24,7 @@ public class CommandRegistry {
         commands.put("print_planet", new PrintPlanetCommand(universe, storage));
         commands.put("print_jedi", new PrintJediCommand(universe, storage));
         commands.put("print_two_planets", new PrintTwoPlanetsCommand(universe, storage));
-        commands.put("get_most_used_color", new GetMostUsedColorCommand(universe, storage));
+        commands.put("get_most_used_saber_color", new GetMostUsedSaberColorCommand(universe, storage));
         commands.put("get_youngest_jedi", new GetYoungestJediCommand(universe, storage));
         commands.put("get_strongest_jedi", new GetStrongestJediCommand(universe, storage));
         return commands;

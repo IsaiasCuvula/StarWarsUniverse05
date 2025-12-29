@@ -5,8 +5,8 @@ import commands.Command;
 import datastorage.DataStorage;
 import universes.Universe;
 
-public class GetMostUsedColorCommand extends Command {
-    public GetMostUsedColorCommand(Universe universe, DataStorage storage) {
+public class GetMostUsedSaberColorCommand extends Command {
+    public GetMostUsedSaberColorCommand(Universe universe, DataStorage storage) {
         super(universe, storage);
     }
     @Override
