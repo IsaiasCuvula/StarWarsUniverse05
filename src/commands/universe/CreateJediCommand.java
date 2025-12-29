@@ -4,11 +4,21 @@ import commands.Command;
 import datastorage.DataStorage;
 import universes.Universe;
 
-
+/**
+ * Command to create a new Jedi.
+ */
 public class CreateJediCommand extends Command {
+    
+    /**
+     * Creates the create-jedi command.
+     */
     public CreateJediCommand(Universe universe, DataStorage storage) {
         super(universe, storage);
     }
+    
+    /**
+     * Executes Jedi creation.
+     */
     @Override
     public void execute(String[] args) throws Exception {
         validateArgsCount(args, 7);

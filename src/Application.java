@@ -3,7 +3,8 @@ import datastorage.FileManager;
 import universes.StarWarsUniverse;
 
 /**
- * Main application entry point. Constructs the FileManager and StarWarsUniverse,
+ * Main application entry point. Constructs the
+ * Storage (FileManager) and (Universe) StarWarsUniverse,
  * wires them into the CommandShell and starts the interactive loop.
  */
 public class Application {
