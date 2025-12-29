@@ -1,4 +1,4 @@
-package manager;
+package datastorage;
 
 import models.Planet;
 import java.util.List;
@@ -7,14 +7,7 @@ import java.util.List;
  * Defines a contract for data persistence operations in a universe management system.
  * This interface provides methods for managing file operations including opening,
  * closing, loading, and saving universe data.
- *
- * Implementations of this interface handle the storage and retrieval of planet
- * and character data using various persistence mechanisms (files, databases, etc.).
- *
- * This interface demonstrates the OOP principles of:
- * - Abstraction: Defines what persistence operations are available without implementation details
- * - Polymorphism: Allows different storage mechanisms to be used interchangeably
- */
+*/
 public interface DataStorage {
     
     /**

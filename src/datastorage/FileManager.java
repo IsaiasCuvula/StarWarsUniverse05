@@ -1,4 +1,4 @@
-package manager;
+package datastorage;
 
 import models.Jedi;
 import models.Planet;
@@ -46,7 +46,11 @@ public class FileManager implements DataStorage {
         try {
             File file = new File(filename);
             if (!file.exists()) {
-                file.createNewFile();
+               boolean result = file.createNewFile();
+               if(!result){
+                   System.out.printf("File %s failed to be created %n", filename);
+               }
+               System.out.printf("File %s successfully created %n", filename);
             }
             currentFilename = filename;
             isOpen = true;

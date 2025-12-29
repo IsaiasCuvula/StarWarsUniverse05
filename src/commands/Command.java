@@ -1,15 +1,11 @@
-package manager;
+package commands;
 
-import exceptions.UniverseException;
+import datastorage.DataStorage;
+import manager.Universe;
 
 /**
  * Abstract base class for all commands in the application.
  * Each concrete command implements the execute method with its specific logic.
- *
- * This class demonstrates:
- * - Abstraction: defines the structure that all commands must follow
- * - Inheritance: concrete commands extend this class
- * - Encapsulation: protects shared resources (universe and storage)
  */
 public abstract class Command {
     
@@ -34,4 +30,10 @@ public abstract class Command {
      * @throws Exception if command execution fails
      */
     public abstract void execute(String[] args) throws Exception;
+    
+    protected void validateArgsCount(String[] args, int expected) throws Exception {
+        if (args.length != expected) {
+            throw new Exception("Expected " + expected + " arguments");
+        }
+    }
 }

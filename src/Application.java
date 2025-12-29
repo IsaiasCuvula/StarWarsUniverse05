@@ -1,5 +1,5 @@
 import manager.ApplicationManager;
-import manager.FileManager;
+import datastorage.FileManager;
 import manager.StarWarsUniverse;
 
 import java.util.Scanner;
