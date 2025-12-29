@@ -19,6 +19,6 @@ public class SaveCommand extends Command {
         storage.save(universe.getPlanets());
         storage.close();
         
-        System.out.println("> Universe state successfully persisted to " + filename);
+        System.out.println("> Universe state successfully saved to " + filename);
     }
 }

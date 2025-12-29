@@ -195,7 +195,6 @@ public class FileManager implements DataStorage {
                 }
             }
             writer.close();
-            System.out.printf("Successfully saved %s%n", filename);
         } catch (Exception e) {
             System.out.println("Error saving file: " + e.getMessage());
         }
